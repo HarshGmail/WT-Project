@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
         
         /*Navigation Bar*/
-        .topnav a {
+        /* .topnav a {
         float: left;
         color: #161616;
         text-align: center;
@@ -26,16 +27,18 @@
         .topnav a.active {
         background-color: aqua;
         color: black;
-        }
+        }*/
 
         h2{
             text-align: center;
+            color: white;
+            font-family: "Bungee", cursive;
         }
         
-        a {
+        /* a {
         font-family: "Bungee", cursive;
         font-size: 1.6em;
-        }
+        }  */
 
         body{
             margin: 0;
@@ -82,13 +85,26 @@
 </head>
 <body>
     <!-- Navigation Bar -->
-    <div class="topnav">
+    <!-- <div class="topnav">
         <a class="active" href="menu">Menu</a>
         <a href="staff">Staff</a>
         <a href="salary">Salaries</a>
         <a href="billinginterface">Billing Interface</a>
-      </div>
-    <br><br><br>
+      </div> -->
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">StoreAssistant</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Page 3</a></li>
+          </ul>
+        </div>
+      </nav>
+    <br>
     <!-- Inventory -->
     <h2>Inventory</h2>
     <br>
@@ -139,7 +155,7 @@
             </div>
         </div>
     </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
     <div class="container1">
         <div class="container2">
             <div class="item1">
