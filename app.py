@@ -129,6 +129,19 @@ def credit_info():
     return render_template("credit_info.html")
 
 
+
+
+
+@app.route("/billinginterface",methods=["GET","POST"])
+def billinginterface():
+    if request.method=="POST":
+        pass
+    return render_template("billinginterface.html")
+
+
+
+
+
 """""......................................CUSTOMER SIDE........................................"""""
 """..............................................................................................."""
 
