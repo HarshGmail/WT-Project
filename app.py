@@ -7,13 +7,21 @@ from enum import unique
 from re import A
 
 
-"""Configuration"""
+"""........................................Configuration.........................................."""
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///Khatabook_Database.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
-"Login Page"
+"""........................................Databases.............................................."""
+user_db = SQLAlchemy(app)
+inventory_db = SQLAlchemy(app)
+supplier_db = SQLAlchemy(app)
+
+
+
+
+
+".............Login Page.............."
 @app.route("/",methods=["GET","POST"])
 def loginpage():
     if request.method=="POST":
@@ -26,17 +34,20 @@ def loginpage():
 
 """"".......................................DEALER SIDE........................................."""""
 """..............................................................................................."""
-"Menu Page"
+
+
+"...............Menu Page................"
 @app.route("/menu",methods=["GET","POST"])
 def menu():
     if request.method=="POST":
-        pass
+        if request.form["inventory"]:
+            return redirect(url_for("inventory"))
     return render_template("menu.html")
 
 
 
 
-"""Inventory"""
+"""..............Inventory.................."""
 @app.route("/inventory",methods=["GET","POST"])
 def inventory():
     if request.method=="POST":
@@ -52,7 +63,7 @@ def inventory_order():
 
 
 
-"""Staff"""
+"""...............Staff................."""
 @app.route("/staff",methods=["GET","POST"])
 def staff():
     if request.method=="POST":
@@ -74,7 +85,7 @@ def staff_modify_info():
 
 
 
-"""Salary payment"""
+"""............Salary payment..........."""
 @app.route("/salary",methods=["GET","POST"])
 def salary():
     if request.method=="POST":
@@ -84,7 +95,7 @@ def salary():
 
 
 
-"""Tax Management"""
+"""..............Tax Management.................."""
 @app.route("/tax_management",methods=["GET","POST"])
 def tax_management():
     if request.method=="POST":

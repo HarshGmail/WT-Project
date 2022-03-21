@@ -4,9 +4,185 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inventory</title>
+    <style>
+        
+        /*Navigation Bar*/
+        .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        }
+
+        .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+        }
+
+        .topnav a.active {
+        background-color: #04AA6D;
+        color: white;
+        }
+
+        h2{
+            text-align: center;
+        }
+        
+        a {
+        font-family: "Bungee", cursive;
+        font-size: 1.6em;
+        }
+
+        body{
+            margin: 0;
+            height: 100vh;
+            /* background-color: aqua; */
+            /* grid-template-rows: auto auto; */
+            /* background-color: #151515; */
+        }
+        .container1{
+            position: absolute;
+            background-color: aqua;
+            right :400px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto;
+            height: 120px;
+            width: 600px;
+            border: 1px solid black;
+        }
+        .container1 > div{
+            background-color: aquamarine;
+            border: 1px solid black;
+        }
+        .container2{
+            display: grid;
+            grid-template-areas: 
+            'menu menu menu header header header'
+            'menu menu menu main main main'
+            'menu menu menu main main main';
+        }
+        .item1{
+            grid-area: header;
+        }
+        .item2{
+            grid-area: menu;
+        }
+        .item3{
+            grid-area: main;
+        }
+    </style>
 </head>
 <body>
-    
+
+    <div class="topnav">
+        <a class="active" href="menu">Menu</a>
+        <!-- <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a> -->
+      </div>
+    <br><br><br>
+    <h2>Inventory</h2>
+    <br>
+    <br>
+    <div class="container1">
+        <div class="container2">
+            <div class="item1">
+                item1
+            </div>
+            <div class="item2">
+                img
+            </div>
+            <div class="item3">
+                cost
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                item2
+            </div>
+            <div class="item2">
+                img2
+            </div>
+            <div class="item3">
+                cost2
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                item3
+            </div>
+            <div class="item2">
+                img3
+            </div>
+            <div class="item3">
+                cost3
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                item4
+            </div>
+            <div class="item2">
+                img4
+            </div>
+            <div class="item3">
+                cost
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="container1">
+        <div class="container2">
+            <div class="item1">
+                item1
+            </div>
+            <div class="item2">
+                img
+            </div>
+            <div class="item3">
+                cost
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                item2
+            </div>
+            <div class="item2">
+                img2
+            </div>
+            <div class="item3">
+                cost2
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                item3
+            </div>
+            <div class="item2">
+                img3
+            </div>
+            <div class="item3">
+                cost3
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                item4
+            </div>
+            <div class="item2">
+                img4
+            </div>
+            <div class="item3">
+                cost
+            </div>
+        </div>
+    </div>
 </body>
 </html>
