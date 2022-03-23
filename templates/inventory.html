@@ -34,43 +34,79 @@
             color: white;
             font-family: "Bungee", cursive;
         }
+        pre{
+            background-color: aquamarine;
+            font-size: 8px;
+            height: 10px;
+            width: 100px;
+            padding: 7px;
+        }
         
-        /* a {
+       /* a {
         font-family: "Bungee", cursive;
         font-size: 1.6em;
         }  */
-
+        
+        .background-image{
+        max-width: 100%;
+        max-height: 100%;
+        display: block; /* remove extra space below image */
+        }
         body{
             margin: 0;
             height: 100vh;
             /* background-color: aqua; */
             /* grid-template-rows: auto auto; */
             background-color: #151515;
+            background-image:url("https://media.istockphoto.com/photos/the-black-and-silver-are-light-gray-with-white-the-gradient-is-the-picture-id1332097112?b=1&k=20&m=1332097112&s=170667a&w=0&h=D_26WN2nM805ssHpKsrqFe9mE63_j2bNefybNF0wOLw=");
+            background-repeat: no-repeat;
+            background-position: 100% 100%;
+            background-attachment: fixed;
+            background-size: 100% 100%;
         }
         .container1{
             position: absolute;
-            background-color: aqua;
-            right :400px;
+            background-color: rgb(235, 84, 84);
+            right: 300px;
             padding: 10px;
             display: grid;
             gap: 10px;
             row-gap: 10px;
             display: inline-grid;
-            grid-template-columns: auto auto auto auto;
+            grid-template-columns: auto auto auto auto auto;
             height: 120px;
-            width: 600px;
+            width: 700px;
             border: 1px solid black;
         }
         .container1 > div{
             background-color: aquamarine;
             border: 1px solid black;
         }
+        .container1-2{
+            position: absolute;
+            background-color: rgb(236, 111, 111);
+            right :300px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto auto;
+            height: 120px;
+            width: 700px;
+            border: 1px solid black;
+        }
+        .container1-2 > div{
+            background-color: aquamarine;
+            border: 1px solid black;
+        }
         .container2{
             display: grid;
+            height: 100px;
             grid-template-areas: 
-            'menu menu menu header header header'
-            'menu menu menu main main main'
-            'menu menu menu main main main';
+            'menu menu menu menu menu menu header'
+            'menu menu menu menu menu menu main'
+            'menu menu menu menu menu menu main';
         }
         .item1{
             grid-area: header;
@@ -78,8 +114,27 @@
         .item2{
             grid-area: menu;
         }
+        .item2-1{
+            grid-area: menu;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-position: 1% 1%;
+            background-attachment: fixed;
+        }
         .item3{
             grid-area: main;
+        }
+        img{
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 42px;
+            height: 96px;
+            }
+        .tab{
+            tab-size: 2;
         }
     </style>
 </head>
@@ -97,108 +152,150 @@
             <a class="navbar-brand" href="#">StoreAssistant</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li>
+            <li class="active"><a href="menu">Menu</a></li>
+            <li><a href="customer_interface">Customer Interface</a></li>
+            <li><a href="staff">Staff</a></li>
+            <li><a href="credits">Credits</a></li>
           </ul>
         </div>
       </nav>
-    <br>
     <!-- Inventory -->
     <h2>Inventory</h2>
     <br>
-    <br>
+    <p style="padding:0px 250px 0px; color: white">This items are low on stock!</p>
     <div class="container1">
         <div class="container2">
             <div class="item1">
-                item1
+                Mobile
             </div>
-            <div class="item2">
-                img
+            <div class="item2-1">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
             </div>
             <div class="item3">
-                cost
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
             </div>
         </div>
         <div class="container2">
             <div class="item1">
-                item2
+                Mobile
             </div>
-            <div class="item2">
-                img2
+            <div class="item2-1">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
             </div>
             <div class="item3">
-                cost2
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
             </div>
         </div>
         <div class="container2">
             <div class="item1">
-                item3
+                Mobile
             </div>
-            <div class="item2">
-                img3
+            <div class="item2-1">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
             </div>
             <div class="item3">
-                cost3
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
             </div>
         </div>
         <div class="container2">
             <div class="item1">
-                item4
+                Mobile
             </div>
-            <div class="item2">
-                img4
+            <div class="item2-1">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
             </div>
             <div class="item3">
-                cost
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                Mobile
+            </div>
+            <div class="item2-1">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
+            </div>
+            <div class="item3">
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
             </div>
         </div>
     </div>
     <br><br><br><br><br><br><br><br><br>
-    <div class="container1">
+    <p style="padding:0px 250px 0px; color: white">These items are about to run low!</p>
+    <div class="container1-2">
         <div class="container2">
             <div class="item1">
-                item1
+                Mobile
             </div>
-            <div class="item2">
-                img
+            <div class="item2-1">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
             </div>
             <div class="item3">
-                cost
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
             </div>
         </div>
         <div class="container2">
             <div class="item1">
-                item2
+                Mobile
             </div>
-            <div class="item2">
-                img2
+            <div class="item2-1">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
             </div>
             <div class="item3">
-                cost2
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
             </div>
         </div>
         <div class="container2">
             <div class="item1">
-                item3
+                Mobile
             </div>
-            <div class="item2">
-                img3
+            <div class="item2-1">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
             </div>
             <div class="item3">
-                cost3
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
             </div>
         </div>
         <div class="container2">
             <div class="item1">
-                item4
+                Mobile
             </div>
-            <div class="item2">
-                img4
+            <div class="item2-1">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
             </div>
             <div class="item3">
-                cost
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                Mobile
+            </div>
+            <div class="item2-1">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
+            </div>
+            <div class="item3">
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
             </div>
         </div>
     </div>
