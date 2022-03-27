@@ -51,7 +51,8 @@ def menu():
 @app.route("/inventory",methods=["GET","POST"])
 def inventory():
     if request.method=="POST":
-        pass
+        if request.form["10"]:
+            print("button")
     return render_template("inventory.html")
 
 @app.route("/inventory_order",methods=["GET","POST"])

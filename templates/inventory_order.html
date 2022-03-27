@@ -4,15 +4,92 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inventory Order</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
+        h2{
+            text-align: center;
+            color: white;
+            font-family: "Bungee", cursive;
+        }
         body{
             background-image:url("https://media.istockphoto.com/photos/the-black-and-silver-are-light-gray-with-white-the-gradient-is-the-picture-id1332097112?b=1&k=20&m=1332097112&s=170667a&w=0&h=D_26WN2nM805ssHpKsrqFe9mE63_j2bNefybNF0wOLw=");
             background-repeat: no-repeat;
             background-position: 100% 100%;
             background-attachment: fixed;
             background-size: 100% 100%;
+        }
+
+        .container1{
+            position: absolute;
+            background-color: rgb(235, 84, 84);
+            right: 515px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            display: inline-grid;
+            grid-template-columns: auto;
+            height: 170px;
+            width: 250px;
+        }
+        .container1 > div{
+            background-color: aquamarine;
+            border: 2px solid black;
+        }
+        .container2{
+            display: grid;
+            height: 145px;
+            grid-template-areas: 
+            'menu menu menu menu menu menu menu header header'
+            'menu menu menu menu menu menu menu main main'
+            'menu menu menu menu menu menu menu main main';
+        }
+        .item1{
+            grid-area: header;
+            
+        }
+        .item2{
+            grid-area: menu;
+        }
+        .item2-1{
+            grid-area: menu;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-position: 1% 1%;
+            background-attachment: fixed;
+        }
+        .item3{
+            grid-area: main;
+        }
+        img{
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 10px;
+            height: 200px;
+            }
+        .tab{
+            tab-size: 2;
+        }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
         }
     </style>
 </head>
@@ -30,7 +107,61 @@
             <li><a href="credits">Credits</a></li>
           </ul>
         </div>
-      </nav>
-    
+    </nav>
+    <div class="container1">
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">Mobile</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:110px; height:141px; border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Available:10</b><br>
+                <b>Sold:40</b><br>
+                <b>cost:10000</b>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br>
+    <h2>Suppliers and Creits    </h2><br>
+    <table>
+        <tr>
+            <th>Company</th>
+            <th>Contact</th>
+            <th>Country</th>
+        </tr>
+        <tr>
+            <td>Alfreds Futterkiste</td>
+            <td>Maria Anders</td>
+            <td>Germany</td>
+        </tr>
+        <tr>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
+        </tr>
+        <tr>
+            <td>Ernst Handel</td>
+            <td>Roland Mendel</td>
+            <td>Austria</td>
+        </tr>
+        <tr>
+            <td>Island Trading</td>
+            <td>Helen Bennett</td>
+            <td>UK</td>
+        </tr>
+        <tr>
+            <td>Laughing Bacchus Winecellars</td>
+            <td>Yoshi Tannamuri</td>
+            <td>Canada</td>
+        </tr>
+        <tr>
+            <td>Magazzini Alimentari Riuniti</td>
+            <td>Giovanni Rovelli</td>
+            <td>Italy</td>
+        </tr>
+    </table>
 </body>
 </html>
