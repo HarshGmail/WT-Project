@@ -6,6 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Order</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script>
+        var startProductBarPos=-1;
+        window.onscroll=function(){
+        var bar = document.getElementById('nav');
+        if(startProductBarPos<0)startProductBarPos=findPosY(bar);
+
+        if(pageYOffset>startProductBarPos){
+            bar.style.position='fixed';
+            bar.style.top=0;
+        }else{
+            bar.style.position='relative';
+        }
+
+        };
+
+        function findPosY(obj) {
+        var curtop = 0;
+        if (typeof (obj.offsetParent) != 'undefined' && obj.offsetParent) {
+            while (obj.offsetParent) {
+            curtop += obj.offsetTop;
+            obj = obj.offsetParent;
+            }
+            curtop += obj.offsetTop;
+        }
+        else if (obj.y)
+            curtop += obj.y;
+        return curtop;
+        }
+    </script>
     <style>
         h2{
             text-align: center;
@@ -91,14 +120,19 @@
         tr:nth-child(even) {
             background-color: #dddddd;
         }
+        .navbar{
+            opacity:0.5;
+            width:100%;
+            z-index:10;
+        }
     </style>
 </head>
 <body>
     <!--Navigation Bar-->
-    <nav class="navbar navbar-inverse">
+    <nav id="nav" class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">StoreAssistant</a>
+            <a class="navbar-brand" href="#">StoreBook</a>
           </div>
           <ul class="nav navbar-nav">
             <li class="active"><a href="menu">Menu</a></li>

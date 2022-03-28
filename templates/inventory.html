@@ -15,6 +15,33 @@
             window.open("inventory_order");
             });
         };
+        var startProductBarPos=-1;
+        window.onscroll=function(){
+        var bar = document.getElementById('nav');
+        if(startProductBarPos<0)startProductBarPos=findPosY(bar);
+
+        if(pageYOffset>startProductBarPos){
+            bar.style.position='fixed';
+            bar.style.top=0;
+        }else{
+            bar.style.position='relative';
+        }
+
+        };
+
+        function findPosY(obj) {
+        var curtop = 0;
+        if (typeof (obj.offsetParent) != 'undefined' && obj.offsetParent) {
+            while (obj.offsetParent) {
+            curtop += obj.offsetTop;
+            obj = obj.offsetParent;
+            }
+            curtop += obj.offsetTop;
+        }
+        else if (obj.y)
+            curtop += obj.y;
+        return curtop;
+        }
     </script>
     <style>
         html{
@@ -55,6 +82,8 @@
             text-align: center;
             color: white;
             font-family: "Bungee", cursive;
+            width:100%;
+            z-index:1;
         }
         pre{
             background-color: aquamarine;
@@ -177,6 +206,11 @@
         .tab{
             tab-size: 2;
         }
+        .navbar{
+            opacity:0.5;
+            width:100%;
+            z-index:10;
+        }
     </style>
 </head>
 <body>
@@ -187,10 +221,10 @@
         <a href="salary">Salaries</a>
         <a href="billinginterface">Billing Interface</a>
       </div> -->
-      <nav class="navbar navbar-inverse">
+      <nav id ="nav" class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">StoreAssistant</a>
+            <a class="navbar-brand" href="#">StoreBook</a>
           </div>
           <ul class="nav navbar-nav">
             <li class="active"><a href="menu">Menu</a></li>

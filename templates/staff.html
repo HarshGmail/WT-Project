@@ -15,8 +15,40 @@
             window.open("staff_full_info");
             });
         };
+        var startProductBarPos=-1;
+        window.onscroll=function(){
+        var bar = document.getElementById('nav');
+        if(startProductBarPos<0)startProductBarPos=findPosY(bar);
+
+        if(pageYOffset>startProductBarPos){
+            bar.style.position='fixed';
+            bar.style.top=0;
+        }else{
+            bar.style.position='relative';
+        }
+
+        };
+
+        function findPosY(obj) {
+        var curtop = 0;
+        if (typeof (obj.offsetParent) != 'undefined' && obj.offsetParent) {
+            while (obj.offsetParent) {
+            curtop += obj.offsetTop;
+            obj = obj.offsetParent;
+            }
+            curtop += obj.offsetTop;
+        }
+        else if (obj.y)
+            curtop += obj.y;
+        return curtop;
+        }
     </script>
     <style>
+        div.sticky{
+            position: -webkit-sticky;
+            position: sticky;
+            top:0;
+        }
         body{
             /* background-color: aqua; */
             /* grid-template-rows: auto auto; */
@@ -77,21 +109,26 @@
             text-align: center;
             color: azure;
         }
+        .navbar{
+            width:100%;
+            z-index:10;
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body>
     <!--Navigation Bar-->
-    <nav class="navbar navbar-inverse">
+    <nav id ="nav" class="navbar navbar-inverse sticky-top">
         <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">StoreAssistant</a>
-          </div>
-          <ul class="nav navbar-nav">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">StoreBook</a>
+        </div>
+        <ul class="nav navbar-nav">
             <li class="active"><a href="menu">Menu</a></li>
             <li><a href="customer_interface">Customer Interface</a></li>
             <li><a href="staff">Staff</a></li>
             <li><a href="credits">Credits</a></li>
-          </ul>
+        </ul>
         </div>
     </nav>
     <h1>...Staff...</h1>
