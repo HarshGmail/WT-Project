@@ -21,6 +21,70 @@
         .navbar{
             opacity:0.5
         } 
+        .container1{
+            position: absolute;
+            right: 290px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            display: inline-grid;
+            grid-template-columns: auto;
+            height: 230px;
+            width: 730px;
+        }
+        .container1 > div{
+            background-color: rgb(179, 169, 238);
+            border: 2px solid black;
+        }
+        .container2{
+            display: grid;
+            height: 230px;
+            grid-template-areas: 
+            'menu menu menu menu menu header header header header header header header'
+            'menu menu menu menu menu main main main main main main main'
+            'menu menu menu menu menu main main main main main main main';
+        }
+        .item1{
+            grid-area: header;
+            
+        }
+        .item2{
+            grid-area: menu;
+        }
+        .item2-1{
+            grid-area: menu;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-position: 1% 1%;
+            background-attachment: fixed;
+        }
+        .item2-1>input{
+            height:226px;
+            width:210px;
+        }
+        .item3{
+            grid-area: main;
+        }
+        .container12{
+            position: absolute;
+            right: 195px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            display: inline-grid;
+            grid-template-columns: auto;
+            height: 230px;
+            width: 930px;
+        }
+        .container12 > div{
+            background-color: rgb(179, 169, 238);
+            border: 2px solid black;
+        }
+        .tab{
+            tab-size: 2;
+        }
     </style>
 </head>
 <body>
@@ -39,5 +103,41 @@
           </ul>
         </div>
     </nav> -->
+    <br><br>
+    <div class="container1">
+        <div class="container2">
+          <div class="item1">
+              <b style ="font-size: 30px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 2px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+          </div>
+          <div class="item2-1">
+              <input type="image" id ="10"  name="submit" src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-businessman-avatar-icon-flat-style-png-image_1917273.jpg" alt="Submit" style="border-right: 2px solid black;"/>
+              <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+          </div>
+          <div class="item3">
+              <b>Name: XCVB</b><br>
+              <b>Designation: XCVBN</b><br>
+              <b>Age: 34</b><br>
+              <b>DOB: DD-MM-YYYY</b><br>
+              <b>Sex: Male/Female</b><br>
+              <b>Blood Group: XY+/-</b>
+          </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="container12">
+      <div><b>Address:</b>23/23,ghajsln,ajjfiua,nasiduhf-537390<br>
+        <b>Aadhar No:</b>123456789012<br>
+        <b>Father Name:</b>Ghjtnln asdkhbf<br>
+        <b>Mother Name:</b>aosdufond<br>
+        <b>Phone:</b>23456789769<br>
+        <b>Salary:</b>10000<br>
+        <b>E-Mail:</b>gaiosud@domain.com<br>
+        <b>Bank Account no:</b>1234-5678-9101<br>
+        <b>Bank Name:</b>asdfyha<br>
+        <b>Bank IFSC code:</b>1234567890987<br>
+        <b>Religon:</b>Hindu<br>
+        <b>Caste:</b>asdfd<br>
+      </div>
+    </div>
 </body>
 </html>
