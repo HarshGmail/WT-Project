@@ -7,6 +7,8 @@ from enum import unique
 from re import A
 import cv2
 from pyzbar import pyzbar
+import sqlalchemy
+
 
 
 """........................................Configuration.........................................."""
@@ -24,7 +26,7 @@ class user_database(db.Model):
     user_password=db.Column(db.String(20),nullable=False)
 
 class inventory_database(db.Model):
-    sno=db.Column(db.Integer,primary_key=True)
+    item_id=db.Column(db.Integer,primary_key=True)
     item_name=db.Column(db.String(100),nullable=False)
     item_costprice=db.Column(db.Integer,nullable=False)
     item_selling_price=db.Column(db.Integer,nullable=False)
@@ -82,17 +84,20 @@ def inventory_order():
 @app.route("/inventory_add_item_page",methods=["GET","POST"])
 def inventory_add_item():
     if request.method=="POST":
+        itemid=request.form["itemid"]
         itemname=request.form["itemname"]
         costprice=request.form["costprice"]
         sellingprice=request.form["sellingprice"]
         availableunits=request.form["availableunits"]
         maxunits=request.form["maxunits"]
-        row1=db.query(inventory_database).first()
-        if row1==None:
-            row=inventory_database(sno=1,item_name=itemname,item_cost_price=costprice,item_selling_price=sellingprice,item_available_units=availableunits,item_max_units=maxunits)
-        else:
-            last_item = inventory_database.query.order_by(inventory_database.sno.desc()).first()
-            row=inventory_database(sno=last_item+1,item_name=itemname,item_cost_price=costprice,item_selling_price=sellingprice,item_available_units=availableunits,item_max_units=maxunits)
+        rows=inventory_database.query.all()
+        for row in rows:
+            if row.itemid==itemid:
+                return redirect(url_for("inventory_add_item_page"))
+        row=inventory_database(item_id=itemid,item_name=itemname,item_costprice=costprice,item_selling_price=sellingprice,item_available_number=availableunits,item_max_units=maxunits)
+        db.session.add(row)
+        db.session.commit()
+        return redirect(url_for("inventory"))
     return render_template("inventory_add_item_page.html")
 
 @app.route("/inventory_modify_item",methods=["GET","POST"])

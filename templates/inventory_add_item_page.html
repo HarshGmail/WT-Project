@@ -28,7 +28,7 @@
             row-gap: 10px;
             display: inline-grid;
             grid-template-columns: auto;
-            height: 230px;
+            height: 260px;
             width: 730px;
         }
         .container1 > div{
@@ -179,6 +179,7 @@
         }
         .container121{
             width:200px;
+            height:228px;
             margin-left: 120px;
         }
     </style>
@@ -191,26 +192,27 @@
             </div>
             <div class="item2-1">
                 <input type="image" id ="10"  name="submit" src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-businessman-avatar-icon-flat-style-png-image_1917273.jpg" alt="Submit" style="border-right: 2px white;border-bottom: 2px rgb(250, 247, 247);border-top: 2px rgb(250, 247, 247);"/>
-                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
             </div>
             <div class="item3">
                 <div class="container121">
-                    <form style="margin-top:20px;">
+                    <form style="margin-top:10px;" method="POST">
                         <div class="form-group">
-                            <br>
-                          <input type="text" clsss="form-control" id="itemname" style="opacity: 0.6;" aria-describedby="emailHelp" placeholder="Item Name">
+                            <input type="text" class="form-control" style="opacity: 0.6;" name="itemid" placeholder="Item id">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" style="opacity: 0.6;" id="costprice" aria-describedby="emailHelp" placeholder="Cost Price">
+                            <input type="text" class="form-control" style="opacity: 0.6;" name="itemname" placeholder="Item Name">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" style="opacity: 0.6;"id="sellingprice" aria-describedby="emailHelp" placeholder="Selling Price">
+                            <input type="text" class="form-control" style="opacity: 0.6;" name="costprice" placeholder="Cost Price">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" style="opacity: 0.6;"id="availableunits" aria-describedby="emailHelp" placeholder="Available Units">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="sellingprice" placeholder="Selling Price">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" style="opacity: 0.6;"id="Max Capacity" aria-describedby="emailHelp" placeholder="Max Capacity">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="availableunits" placeholder="Available Units">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="maxunits" placeholder="Max Capacity">
                         </div>
                         <button type="submit" style="opacity: 0.6;" class="btn btn-dark">Submit</button>
                       </form>
