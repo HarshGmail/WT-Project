@@ -71,9 +71,8 @@ def menu():
 """..............Inventory.................."""
 @app.route("/inventory",methods=["GET","POST"])
 def inventory():
-    if request.method=="POST":
-        pass
-    return render_template("inventory.html")
+    allrows=inventory_database.query.all()
+    return render_template("inventory.html",idb=allrows)
 
 @app.route("/inventory_order",methods=["GET","POST"])
 def inventory_order():
@@ -92,7 +91,7 @@ def inventory_add_item():
         maxunits=request.form["maxunits"]
         rows=inventory_database.query.all()
         for row in rows:
-            if row.itemid==itemid:
+            if row.item_id==itemid:
                 return redirect(url_for("inventory_add_item_page"))
         row=inventory_database(item_id=itemid,item_name=itemname,item_costprice=costprice,item_selling_price=sellingprice,item_available_number=availableunits,item_max_units=maxunits)
         db.session.add(row)
@@ -103,7 +102,27 @@ def inventory_add_item():
 @app.route("/inventory_modify_item",methods=["GET","POST"])
 def inventory_modify_item():
     if request.method=="POST":
-        pass
+        oldid=request.form["olditemid"]
+        itemid=request.form["itemid"]
+        itemname=request.form["itemname"]
+        costprice=request.form["costprice"]
+        sellingprice=request.form["sellingprice"]
+        availableunits=request.form["availableunits"]
+        maxunits=request.form["maxunits"]
+        rows=inventory_database.query.all()
+        for row in rows:
+            if row.item_id==oldid:
+                row.item_id=itemid
+                row.item_name=itemname
+                row.item_costprice=costprice
+                row.item_selling_price=sellingprice
+                row.item_available_number=availableunits
+                row.item_maximum_units=maxunits
+                return redirect(url_for("inventory"))
+        row=inventory_database(item_id=itemid,item_name=itemname,item_costprice=costprice,item_selling_price=sellingprice,item_available_number=availableunits,item_max_units=maxunits)
+        db.session.add(row)
+        db.session.commit()
+        return redirect(url_for("inventory"))
     return render_template("inventory_modify_item.html")
 
 
