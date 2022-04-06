@@ -109,22 +109,35 @@ def inventory_modify_item():
         sellingprice=request.form["sellingprice"]
         availableunits=request.form["availableunits"]
         maxunits=request.form["maxunits"]
-        rows=inventory_database.query.all()
-        for row in rows:
-            if row.item_id==oldid:
-                row.item_id=itemid
-                row.item_name=itemname
-                row.item_costprice=costprice
-                row.item_selling_price=sellingprice
-                row.item_available_number=availableunits
-                row.item_maximum_units=maxunits
-                return redirect(url_for("inventory"))
-        row=inventory_database(item_id=itemid,item_name=itemname,item_costprice=costprice,item_selling_price=sellingprice,item_available_number=availableunits,item_max_units=maxunits)
+        row=inventory_database.query.filter_by(item_id=oldid).first()
+        row.item_id=itemid
+        row.item_name=itemname
+        row.item_costprice=costprice
+        row.item_selling_price=sellingprice
+        row.item_available_number=availableunits
+        row.item_maximum_units=maxunits
         db.session.add(row)
         db.session.commit()
         return redirect(url_for("inventory"))
     return render_template("inventory_modify_item.html")
 
+@app.route("/inventory_updation",methods=["GET","POST"])
+def inventory_updation():
+    if request.method=="POST":
+        itemid=request.form["itemid"]
+        costprice=request.form["costprice"]
+        sellingprice=request.form["sellingprice"]
+        availableunits=request.form["availableunits"]
+        maxunits=request.form["maxunits"]
+        row=inventory_database.query.filter_by(item_id=itemid).first()
+        row.item_costprice=costprice
+        row.item_selling_price=sellingprice
+        row.item_available_number=availableunits
+        row.item_maximum_units=maxunits
+        db.session.add(row)
+        db.session.commit()
+        return redirect(url_for("inventory"))
+    return render_template("inventory_updation.html")
 
 """...............Staff................."""
 @app.route("/staff",methods=["GET","POST"])
