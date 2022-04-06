@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script>
+    <!-- <script>
         window.onload = function() {
         document.getElementById("14").addEventListener('click', function (e) {
             var img = document.createElement('img');
@@ -28,21 +28,7 @@
         }
 
         };
-
-        function findPosY(obj) {
-        var curtop = 0;
-        if (typeof (obj.offsetParent) != 'undefined' && obj.offsetParent) {
-            while (obj.offsetParent) {
-            curtop += obj.offsetTop;
-            obj = obj.offsetParent;
-            }
-            curtop += obj.offsetTop;
-        }
-        else if (obj.y)
-            curtop += obj.y;
-        return curtop;
-        }
-    </script>
+    </script> -->
     <style>
         html{
             scroll-behavior: smooth;
@@ -389,9 +375,10 @@
             <div class="item1">
                 <b>{{row.item_name}}</b><hr style="size:1px;color:#151515;border:1px solid black; margin-top:0%;margin-bottom:0%" color="balck">
             </div>
-            <div class="item2-1">
-                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:60px; height:98px;"/>
-            </div>
+            <form method="POST">
+            <div class="item2-1" >
+                <input type="image" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:60px; height:98px;"/>
+            </div></form>
             <div class="item3">
                 <b>Available:{{row.item_available_number}}</b><br>
                 <b>Sold:{{row.item_max_units-row.item_available_number}}</b><br>
