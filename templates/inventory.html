@@ -6,7 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- <script>
+        window.onload = function() {
+        document.getElementById("14").addEventListener('click', function (e) {
+            var img = document.createElement('img');
+            img.setAttribute('src', 'inventory_order');
+            e.target.appendChild(img);
+            window.open("inventory_order");
+            });
+        };
+        var startProductBarPos=-1;
+        window.onscroll=function(){
+        var bar = document.getElementById('nav');
+        if(startProductBarPos<0)startProductBarPos=findPosY(bar);
+
+        if(pageYOffset>startProductBarPos){
+            bar.style.position='fixed';
+            bar.style.top=0;
+        }else{
+            bar.style.position='relative';
+        }
+
+        };
+    </script> -->
     <style>
+        html{
+            scroll-behavior: smooth;
+        }
+        #down {
+            margin-top: 100%;
+            padding-bottom: 25%;
+        } 
+        
         /*Navigation Bar*/
         /* .topnav a {
         float: left;
@@ -32,6 +63,13 @@
             text-align: center;
             color: white;
             font-family: "Bungee", cursive;
+        }
+        h3{
+            text-align: center;
+            color: white;
+            font-family: "Bungee", cursive;
+            width:100%;
+            z-index:1;
         }
         pre{
             background-color: aquamarine;
@@ -65,12 +103,12 @@
         }
         .container1{
             position: absolute;
-            background-color: rgb(235, 84, 84);
+            background-color: rgb(241, 56, 56);
             right: 300px;
             padding: 10px;
             display: grid;
             gap: 10px;
-            row-gap: 10px;
+            row-gap: 15px;
             display: inline-grid;
             grid-template-columns: auto auto auto auto auto;
             height: 120px;
@@ -78,7 +116,7 @@
             border: 1px solid black;
         }
         .container1 > div{
-            background-color: aquamarine;
+            background-color: lightgoldenrodyellow;
             border: 1px solid black;
         }
         .container1-2{
@@ -96,19 +134,21 @@
             border: 1px solid black;
         }
         .container1-2 > div{
-            background-color: aquamarine;
+            background-color: lightyellow;
             border: 1px solid black;
         }
         .container2{
             display: grid;
             height: 100px;
+            width: 200px;
             grid-template-areas: 
-            'menu menu menu menu menu menu header'
-            'menu menu menu menu menu menu main'
-            'menu menu menu menu menu menu main';
+            'menu menu menu menu header header'
+            'menu menu menu menu main main'
+            'menu menu menu menu main main';
         }
         .item1{
             grid-area: header;
+            text-decoration: solid;
         }
         .item2{
             grid-area: menu;
@@ -123,6 +163,24 @@
         .item3{
             grid-area: main;
         }
+        .container3{
+            position: absolute;
+            right: 80px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            column-gap: 15px;
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto auto;
+            height: 120px;
+            width: 1100px;
+            border: 1px solid black;
+        }
+        .container3 > div{
+            background-color: lightgoldenrodyellow;
+            border: 1px solid black;
+        }
         img{
             position: absolute;
             top: 0;
@@ -135,6 +193,14 @@
         .tab{
             tab-size: 2;
         }
+        .navbar{
+            opacity:0.5;
+            width:100%;
+            z-index:10;
+        }
+        .button_r{
+            margin-left: 455px;
+        }
     </style>
 </head>
 <body>
@@ -145,10 +211,10 @@
         <a href="salary">Salaries</a>
         <a href="billinginterface">Billing Interface</a>
       </div> -->
-      <nav class="navbar navbar-inverse">
+    <nav id ="nav" class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">StoreAssistant</a>
+            <a class="navbar-brand" href="#">StoreBook</a>
           </div>
           <ul class="nav navbar-nav">
             <li class="active"><a href="menu">Menu</a></li>
@@ -157,18 +223,20 @@
             <li><a href="credits">Credits</a></li>
           </ul>
         </div>
-      </nav>
+    </nav>
     <!-- Inventory -->
-    <h2>Inventory</h2>
+    <!-- <h2>Inventory</h2>
     <br>
-    <p style="padding:0px 250px 0px; color: white">This items are low on stock!</p>
+    <div class="button_r">
+    <a href="inventory_add_item_page"><button>Add an Item</button></a> <a href="inventory_modify_item"><button>Modify an Item</button></a> <a href="inventory_modify_item"><button>Inventory Updation</button></a></div>
+    <p style="padding:0px 250px 0px; color: white">These items are low on stock!</p>
     <div class="container1">
         <div class="container2">
             <div class="item1">
                 Mobile
             </div>
             <div class="item2-1">
-                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
+                <input type="image" id ="10"  name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
             </div>
             <div class="item3">
                 Available:10<br>
@@ -181,7 +249,7 @@
                 Mobile
             </div>
             <div class="item2-1">
-                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
+                <input type="image" id ="11" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
             </div>
             <div class="item3">
                 Available:10<br>
@@ -194,7 +262,7 @@
                 Mobile
             </div>
             <div class="item2-1">
-                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
+                <input type="image" id ="12" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
             </div>
             <div class="item3">
                 Available:10<br>
@@ -207,7 +275,7 @@
                 Mobile
             </div>
             <div class="item2-1">
-                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
+                <input type="image" id ="13" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
             </div>
             <div class="item3">
                 Available:10<br>
@@ -220,7 +288,7 @@
                 Mobile
             </div>
             <div class="item2-1">
-                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
+                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
             </div>
             <div class="item3">
                 Available:10<br>
@@ -229,15 +297,15 @@
             </div>
         </div>
     </div>
-    <br><br><br><br><br><br><br><br><br>
-    <p style="padding:0px 250px 0px; color: white">These items are about to run low!</p>
+    <br><br><br><br><br><br><br><br><br><br> -->
+    <!-- <p style="padding:0px 250px 0px; color: white">These items are about to run low!</p>
     <div class="container1-2">
         <div class="container2">
             <div class="item1">
                 Mobile
             </div>
             <div class="item2-1">
-                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
+                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
             </div>
             <div class="item3">
                 Available:10<br>
@@ -250,7 +318,7 @@
                 Mobile
             </div>
             <div class="item2-1">
-                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
+                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
             </div>
             <div class="item3">
                 Available:10<br>
@@ -263,7 +331,7 @@
                 Mobile
             </div>
             <div class="item2-1">
-                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
+                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
             </div>
             <div class="item3">
                 Available:10<br>
@@ -276,7 +344,7 @@
                 Mobile
             </div>
             <div class="item2-1">
-                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
+                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
             </div>
             <div class="item3">
                 Available:10<br>
@@ -289,7 +357,7 @@
                 Mobile
             </div>
             <div class="item2-1">
-                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">
+                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
             </div>
             <div class="item3">
                 Available:10<br>
@@ -297,6 +365,27 @@
                 cost:10000
             </div>
         </div>
+    </div> -->
+    <!-- <br><br><br><br><br><br><br> -->
+    <h3>Total Inventory</h3>
+    <div class="button_r"><a href="inventory_add_item_page"><button>Add an Item</button></a> <a href="inventory_modify_item"><button>Modify an Item</button></a> <a href="inventory_updation"><button>Inventory Updation</button></a></div>
+    <div class="container3">
+        {% for row in idb%}
+        <div class="container2">
+            <div class="item1">
+                <b>{{row.item_name}}</b><hr style="size:1px;color:#151515;border:1px solid black; margin-top:0%;margin-bottom:0%" color="balck">
+            </div>
+            <div class="item2-1" >
+                <input type="image" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:60px; height:98px;"/>
+            </div>
+            <div class="item3">
+                <b>Available:{{row.item_available_number}}</b><br>
+                <b>Sold:{{row.item_max_units-row.item_available_number}}</b><br>
+                <b>SP:₹{{row.item_selling_price}}</b><br>
+                <b>Profit:₹{{row.item_selling_price-row.item_costprice}}</b>
+            </div>
+        </div>
+        {%endfor%}
     </div>
 </body>
 </html>

@@ -5,8 +5,412 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script>
+        window.onload = function() {
+        document.getElementById("10").addEventListener('click', function (e) {
+            var img = document.createElement('img');
+            img.setAttribute('src', 'staff');
+            e.target.appendChild(img);
+            window.open("staff_full_info");
+            });
+        };
+        var startProductBarPos=-1;
+        window.onscroll=function(){
+        var bar = document.getElementById('nav');
+        if(startProductBarPos<0)startProductBarPos=findPosY(bar);
+
+        if(pageYOffset>startProductBarPos){
+            bar.style.position='fixed';
+            bar.style.top=0;
+        }else{
+            bar.style.position='relative';
+        }
+
+        };
+
+        function findPosY(obj) {
+        var curtop = 0;
+        if (typeof (obj.offsetParent) != 'undefined' && obj.offsetParent) {
+            while (obj.offsetParent) {
+            curtop += obj.offsetTop;
+            obj = obj.offsetParent;
+            }
+            curtop += obj.offsetTop;
+        }
+        else if (obj.y)
+            curtop += obj.y;
+        return curtop;
+        }
+    </script>
+    <style>
+        div.sticky{
+            position: -webkit-sticky;
+            position: sticky;
+            top:0;
+        }
+        body{
+            /* background-color: aqua; */
+            /* grid-template-rows: auto auto; */
+            background-color: #151515;
+            background-image:url("https://wallpaperaccess.com/full/1177739.jpg");
+            background-repeat: no-repeat;
+            background-position: 100% 100%;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        .container1{
+            position: absolute;
+            right: 170px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            display: inline-grid;
+            grid-template-columns: auto auto;
+            height: 170px;
+            width: 930px;
+        }
+        .container1 > div{
+            background-color: aquamarine;
+            border: 2px solid black;
+        }
+        .container2{
+            display: grid;
+            height: 150px;
+            grid-template-areas: 
+            'menu menu menu menu header header header header'
+            'menu menu menu menu main main main main'
+            'menu menu menu menu main main main main';
+        }
+        .item1{
+            grid-area: header;
+            
+        }
+        .item2{
+            grid-area: menu;
+        }
+        .item2-1{
+            grid-area: menu;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-position: 1% 1%;
+            background-attachment: fixed;
+        }
+        .item2-1>input{
+            height:146px;
+            width:120px;
+        }
+        .item3{
+            grid-area: main;
+        }
+        h1{
+            font-family:Arial, Helvetica, sans-serif;
+            text-align: center;
+            color: azure;
+        }
+        .navbar{
+            width:100%;
+            z-index:10;
+            opacity: 0.5;
+        }
+        .button_r{
+            margin-left: 465px;
+        }
+    </style>
 </head>
 <body>
-    
+    <!--Navigation Bar-->
+    <nav id ="nav" class="navbar navbar-inverse sticky-top">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">StoreBook</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="menu">Menu</a></li>
+            <li><a href="customer_interface">Customer Interface</a></li>
+            <li><a href="staff">Staff</a></li>
+            <li><a href="credits">Credits</a></li>
+        </ul>
+        </div>
+    </nav>
+    <h1>...Staff...</h1>
+    <div class="button_r">
+        <a href="staff_newemployee_addition"><button>Add new Employee</button></a> <a href="staff_employee_modification"><button>Modify Details of an Employee</button></a>
+    </div>
+    <div class="container1">
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 20px;">id:12345678</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://cdn1.iconfinder.com/data/icons/photography-2/512/YPS__human_avatar_portrait_photography_picture_photo-512.png" alt="Submit" style="border-right: 2px solid black;"/>
+                <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+            </div>
+            <div class="item3">
+                <b>Name: XCVB</b><br>
+                <b>Designation: XCVBN</b>
+                <b>Age: 34</b><br>
+                <b>DOB: DD-MM-YYYY</b><br>
+                <b>Sex: Male/Female</b><br>
+                <b>Blood Group: XY+/-</b>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

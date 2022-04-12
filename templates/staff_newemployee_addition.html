@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Modification</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body{
+            margin: 0;
+            height: 100vh;
+            /* background-color: aqua; */
+            /* grid-template-rows: auto auto; */
+            background-color: #151515;
+            background-image:url("https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8&w=1000&q=80");
+            background-repeat: no-repeat;
+            background-position: 100% 100%;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        .container1{
+            position: absolute;
+            right: 290px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            display: inline-grid;
+            grid-template-columns: auto;
+            height: 260px;
+            width: 730px;
+        }
+        .container1 > div{
+            /* background-color: rgb(179, 169, 238); */
+            border: 2px solid rgb(250, 247, 247);
+        }
+        .container2{
+            display: grid;
+            height: 430px;
+            grid-template-areas: 
+            'header header header header header header'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main'
+            'menu   main   main   main   main   main';
+        }
+        .item1{
+            grid-area: header;
+            
+        }
+        .item2{
+            grid-area: menu;
+        }
+        .item2-1{
+            grid-area: menu;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-position: 1% 1%;
+            background-attachment: fixed;
+        }
+        .item2-1>input{
+            height:230px;
+            width:210px;
+        }
+        .item3{
+            grid-area: main;
+        }
+        .container121{
+            width:200px;
+            height:228px;
+            margin-left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container1">
+        <div class="container2">
+            <div class="item1">
+                <b style ="font-size: 30px; color: aliceblue;">Enter the details of the new item</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 2px solid rgb(250, 247, 247); padding-left: 0%; padding-right:0%;" color="solid black">
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-businessman-avatar-icon-flat-style-png-image_1917273.jpg" alt="Submit" style="border-right: 2px white;border-bottom: 2px rgb(250, 247, 247);border-top: 2px rgb(250, 247, 247);"/>
+            </div>
+            <div class="item3">
+                <div class="container121">
+                    <form style="margin-top:10px;" method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;" name="employeeid" placeholder="Employee id">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;" name="employeename" placeholder="Employee Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;" name="basic" placeholder="Basic">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="bloodgroup" placeholder="Blood Group">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="designation" placeholder="Designation">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="address" placeholder="Address">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="aadharno" placeholder="Aadahr Card no.">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="phoneno" placeholder="Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="dob" placeholder="DD/MM/YYYY DOB">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="fatname" placeholder="Father Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="motname" placeholder="Mother Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="emailid" placeholder="Email id">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="sex" placeholder="sex">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="bankaccountno" placeholder="Bank Account No.">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="bankname" placeholder="Bank Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="bankifsc" placeholder="Bank IFSC">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" style="opacity: 0.6;"name="aadharno" placeholder="Aadahr Card no.">
+                        </div>
+                        <button type="submit" style="opacity: 0.6;" class="btn btn-dark">Submit</button>
+                      </form>
+                </div>
+            </div>
+          </div>
+    </div>
+</body>
+</html>
