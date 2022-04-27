@@ -1,3 +1,4 @@
+import email
 from flask import Flask, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask,render_template,request,redirect, url_for
@@ -22,7 +23,7 @@ db = SQLAlchemy(app)
 
 class user_database(db.Model):
     sno=db.Column(db.Integer,primary_key=True)
-    user_type=db.Column(db.String(10),nullable=False)
+    user_name=db.Column(db.String(10),nullable=False)
     user_password=db.Column(db.String(20),nullable=False)
 
 class inventory_database(db.Model):
@@ -34,9 +35,27 @@ class inventory_database(db.Model):
     item_max_units=db.Column(db.Integer,nullable=False)
 
 class suppliers_database(db.Model):
-    sno=db.Column(db.Integer,primary_key=True)
+    supplier_id=db.Column(db.Integer,primary_key=True)
     supplier_name=db.Column(db.String(30),nullable=False)
     supplier_credit=db.Column(db.Integer,nullable=False)
+
+class employee_database(db.Model):
+    employee_id=db.Column(db.Integer,primary_key=True)
+    employee_name=db.Column(db.String(30),nullable=False)
+    employee_basic=db.Column(db.Integer,nullable=False)
+    employee_bloodgroup=db.Column(db.String(5),nullable=False)
+    employee_designation=db.Column(db.String(25),nullable=False)
+    employee_address=db.Column(db.String(200),nullable=False)
+    employee_aadharno=db.Column(db.String(12),nullable=False)
+    employee_phonenumber=db.Column(db.String(10),nullable=False)
+    employee_dob=db.Column(db.String(10),nullable=False)
+    employee_fathername=db.Column(db.String(20),nullable=False)
+    employee_mothername=db.Column(db.String(20),nullable=False)
+    employee_emailid=db.Column(db.String(40),nullable=False)
+    employee_sex=db.Column(db.String(11),nullable=False)
+    employee_bankaccountno=db.Column(db.String(18),nullable=False)
+    employee_bankname=db.Column(db.String(30),nullable=False)
+    employee_bankifsc=db.Column(db.String(11),nullable=False)
 
 
     
@@ -142,9 +161,8 @@ def inventory_updation():
 """...............Staff................."""
 @app.route("/staff",methods=["GET","POST"])
 def staff():
-    if request.method=="POST":
-        pass
-    return render_template("staff.html")
+    allrows=employee_database.query.all()
+    return render_template("staff.html",edb=allrows)
 
 @app.route("/staff_full_info",methods=["GET","POST"])
 def staff_full_info():
@@ -155,7 +173,34 @@ def staff_full_info():
 @app.route("/staff_newemployee_addition",methods=["GET","POST"])
 def staff_newemployee_addition():
     if request.method=="POST":
-        pass
+        emp_id=request.form["employeeid"]
+        ename=request.form["employeename"]
+        basic=request.form["basic"]
+        bgrp=request.form["bloodgroup"]
+        desg=request.form["designation"]
+        address=request.form["address"]
+        aadno=request.form["aadharno"]
+        phoneno=request.form["phoneno"]
+        dob=request.form["dob"]
+        fatname=request.form["fatname"]
+        motname=request.form["motname"]
+        emailid=request.form["emailid"]
+        sex=request.form["sex"]
+        bacctno=request.form["bankaccountno"]
+        bname=request.form["bankname"]
+        bifsc=request.form["bankifsc"]
+        rows=employee_database.query.all()
+        for row in rows:
+            if row.employee_id==emp_id:
+                return render_template("staff_newemployee_addition")
+        row=employee_database(employee_id=emp_id,employee_name=ename,employee_basic=basic,
+        employee_bloodgroup=bgrp,employee_designation=desg,employee_address=address,
+        employee_aadharno=aadno,employee_phonenumber=phoneno,employee_dob=dob,
+        employee_fathername=fatname,employee_mothername=motname,employee_emailid=emailid,
+        employee_sex=sex,employee_bankaccountno=bacctno,employee_bankname=bname,employee_bankifsc=bifsc)
+        db.session.add(row)
+        db.session.commit()
+        return redirect(url_for("staff"))
     return render_template("staff_newemployee_addition.html")
 
 @app.route("/staff_employee_modification",methods=["GET","POST"])
