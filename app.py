@@ -57,7 +57,26 @@ class employee_database(db.Model):
     employee_bankname=db.Column(db.String(30),nullable=False)
     employee_bankifsc=db.Column(db.String(11),nullable=False)
 
+class store_database(db.Model):
+    store_id=db.Column(db.String(10),primary_key=True)
+    store_name=db.Column(db.String(50),nullable=False)
+    store_address=db.Column(db.String(200),nullable=False)
+    store_phone_number=db.Column(db.String(13),nullable=False)
+    store_type=db.Column(db.String(20),nullable=False)
 
+class stores_orders_database(db.Model):
+    store_order_id=db.Column(db.String(12),primary_key=True)
+    store_order_details=db.Column(db.String(1000),nullable=False)
+    store_order_total=db.Column(db.Integer,nullable=False)
+    store_id=db.Column(db.String(12),nullable=False)
+
+class temp_database(db.Model):
+    sno=db.Column(db.Integer,primary_key=True)
+    id=db.Column(db.String(12),nullable=False)
+    name=db.Column(db.String(30),nullable=False)
+    qty=db.Column(db.Integer,nullable=False)
+    sp=db.Column(db.Integer,nullable=False)
+    price=db.Column(db.Integer,nullable=False)
     
 db.create_all()
 
@@ -235,9 +254,8 @@ def tax_management():
 """Customer Interface"""
 @app.route("/customer_interface",methods=["GET","POST"])
 def customer_interface():
-    if request.method=="POST":
-        pass
-    return render_template("customer_interface.html")
+    allrows=inventory_database.query.all()
+    return render_template("customer_interface.html",idb=allrows)
 
 
 
@@ -262,9 +280,58 @@ def credit_info():
 @app.route("/billinginterface",methods=["GET","POST"])
 def billinginterface():
     if request.method=="POST":
-        pass
-    return render_template("billinginterface.html")
+        item_id=int(request.form["itemid"])
+        qty=request.form["qty"]
+        if item_id==None or qty ==None:
+            return render_template("billinginterface.html")
+        idb=inventory_database.query.all()
+        sp=0
+        name=""
+        row=None
+        for row in idb:
+            if row.item_id==item_id:
+                sp=row.item_selling_price
+                name=row.item_name
+                row.item_available_number-=int(qty)
+                break
+        db.session.add(row)
+        db.session.commit()
+        price=int(sp)*int(qty)
+        tdb=temp_database.query.all()
+        ns=0
+        for _ in tdb:
+            ns=_.sno
+        sno=ns+1
+        row=temp_database(sno=sno,id=item_id,name=name,qty=qty,sp=sp,price=price)
+        db.session.add(row)
+        db.session.commit()
+    if request.method=="POST1":
+        print("d")
+        return redirect(url_for("billpreview"))
+    tdb=temp_database.query.all()
+    return render_template("billinginterface.html",tdb=tdb)
 
+
+
+@app.route("/billpreview",methods=["GET","POST"])
+def billpreview():
+    if request.method=="POST":
+        tdb=temp_database.query.all()
+        sod=stores_orders_database.query.all()
+        s=""
+        for row in sod:
+            s=row.store_order_id
+        k=int(s)+1
+        p=""
+        total=0
+        for row in tdb:
+            p=p+f"{row.name}({row.qty})"
+            total+=int(row.price)
+    tdb=temp_database.query.all()
+    gtotal=0
+    for row in tdb:
+        gtotal+=int(row.price)
+    return render_template("billpreview.html",tdb=tdb,gtotal=gtotal)
 
 
 

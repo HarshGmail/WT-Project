@@ -5,47 +5,155 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Billing Interface</title>
-    <script>
-        var startProductBarPos=-1;
-        window.onscroll=function(){
-        var bar = document.getElementById('nav');
-        if(startProductBarPos<0)startProductBarPos=findPosY(bar);
-
-        if(pageYOffset>startProductBarPos){
-            bar.style.position='fixed';
-            bar.style.top=0;
-        }else{
-            bar.style.position='relative';
-        }
-
-        };
-
-        function findPosY(obj) {
-        var curtop = 0;
-        if (typeof (obj.offsetParent) != 'undefined' && obj.offsetParent) {
-            while (obj.offsetParent) {
-            curtop += obj.offsetTop;
-            obj = obj.offsetParent;
-            }
-            curtop += obj.offsetTop;
-        }
-        else if (obj.y)
-            curtop += obj.y;
-        return curtop;
-        }
-    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
         body{
             background-image:url("https://media.istockphoto.com/photos/the-black-and-silver-are-light-gray-with-white-the-gradient-is-the-picture-id1332097112?b=1&k=20&m=1332097112&s=170667a&w=0&h=D_26WN2nM805ssHpKsrqFe9mE63_j2bNefybNF0wOLw=");
         }
+        .container1{
+            position: absolute;
+            background-color: rgb(241, 235, 235);
+            right: 300px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 15px;
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto auto;
+            height: 210px;
+            width: 700px;
+            border: 1px solid black;
+        }
+        .container1 > div{
+            background-color: lightgoldenrodyellow;
+            border: 1px solid black;
+        }
+        .container1-2{
+            position: absolute;
+            background-color: rgb(236, 111, 111);
+            right :300px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto auto;
+            height: 120px;
+            width: 700px;
+            border: 1px solid black;
+        }
+        .container1-2 > div{
+            background-color: lightyellow;
+            border: 1px solid black;
+        }
+        .container2{
+            display: grid;
+            height: 100px;
+            width: 200px;
+            grid-template-areas: 
+            'menu menu menu menu header header'
+            'menu menu menu menu main main'
+            'menu menu menu menu main main';
+        }
+        .item1{
+            grid-area: header;
+            text-decoration: solid;
+        }
+        .item2{
+            grid-area: menu;
+        }
+        .item2-1{
+            grid-area: menu;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-position: 1% 1%;
+            background-attachment: fixed;
+        }
+        .item3{
+            grid-area: main;
+        }
+        .container3{
+            position: absolute;
+            right: 80px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            column-gap: 15px;
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto auto;
+            height: 120px;
+            width: 1100px;
+            border: 1px solid black;
+        }
+        .container3 > div{
+            background-color: lightgoldenrodyellow;
+            border: 1px solid black;
+        }
         .navbar{
             width:100%;
             z-index:10;
-            opacity:0.5
+            opacity:0.5;
         }
     </style>
 </head>
 <body>
-       
+    <nav id ="nav" class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">StoreBook</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="menu">Menu</a></li>
+            <li><a href="customer_interface">Customer Interface</a></li>
+            <li><a href="staff">Staff</a></li>
+            <li><a href="credits">Credits</a></li>
+          </ul>
+        </div>
+    </nav>
+    <div class="container1">
+        <h4><b>Add an item</b></h4>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Item ID</label>
+                <input type="text" class="form-control" name="itemid" aria-describedby="emailHelp"> 
+              </div>
+              <div class="mb-3">
+                <label for="desc" class="form-label">Quantity</label>
+                <input type="text" class="form-control" name="qty">
+              </div>
+              <br>
+              <button type="submit" class="btn btn-dark" style="color:white; background-color:black">Submit</button>
+            </form>
+        </form>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="container" style="background-color:white; width:1000px">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" style="width:10px">Sno.</th>
+                <th scope="col" style="width:700px">Name</th>
+                <th scope="col" style="width:50px">Qty</th>
+                <th scope="col" style="width:50px">SP</th>
+                <th scope="col" style="width:70px">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+                {%for row in tdb%}
+              <tr>
+                <th scope="row">{{row.sno}}</th>
+                <td>{{row.name}}</td>
+                <td>{{row.qty}}</td>
+                <td>{{row.sp}}</td>
+                <td>{{row.price}}</td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+        <form method="POST1">
+            <a type="submit" href="billpreview" class="btn btn-dark" style="color:white; background-color:black">Generate bill</a>
+        </form>
 </body>
 </html>

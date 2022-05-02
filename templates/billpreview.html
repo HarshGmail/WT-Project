@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Preview</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body{
+            background-image:url("https://media.istockphoto.com/photos/the-black-and-silver-are-light-gray-with-white-the-gradient-is-the-picture-id1332097112?b=1&k=20&m=1332097112&s=170667a&w=0&h=D_26WN2nM805ssHpKsrqFe9mE63_j2bNefybNF0wOLw=");
+        }
+    </style>
+</head>
+<body>
+    <nav id ="nav" class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">StoreBook</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="menu">Menu</a></li>
+            <li><a href="customer_interface">Customer Interface</a></li>
+            <li><a href="staff">Staff</a></li>
+            <li><a href="credits">Credits</a></li>
+          </ul>
+        </div>
+    </nav>
+    <div class="container" style="background-color:white; width:1000px">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" style="width:10px">Sno.</th>
+                <th scope="col" style="width:800px">Name</th>
+                <th scope="col" style="width:50px">Qty</th>
+                <th scope="col" style="width:100px">SP</th>
+                <th scope="col" style="width:120px">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+                {%for row in tdb%}
+              <tr>
+                <th scope="row">{{row.sno}}</th>
+                <td>{{row.name}}</td>
+                <td>{{row.qty}}</td>
+                <td>{{row.sp}}</td>
+                <td>{{row.price}}</td>
+              </tr>
+              {%endfor%}
+              <tr>
+                  <th>-</th>
+                  <td></td>
+                  <td></td>
+                  <td>Grand Total=</td>
+                  <td>{{gtotal}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br>
+        <div style="margin-left: 600px;">
+            <form method="POST">
+                <button type="submit" class="btn btn-dark" style="color:black; background-color:white">Submit</button>
+            </form>
+        </div>
+</body>
+</html>
