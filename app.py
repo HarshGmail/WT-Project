@@ -317,16 +317,26 @@ def billinginterface():
 def billpreview():
     if request.method=="POST":
         tdb=temp_database.query.all()
-        sod=stores_orders_database.query.all()
+        ttdb=tdb
+        for row in tdb:
+            db.session.delete(row)
+            db.session.commit()
         s=""
+        sod=stores_orders_database.query.all()
         for row in sod:
             s=row.store_order_id
-        k=int(s)+1
+        if s=="":
+            k=0
+        else:
+            k=int(s)+1
         p=""
         total=0
-        for row in tdb:
-            p=p+f"{row.name}({row.qty})"
+        for row in ttdb:
+            p=p+f"{row.name}({row.qty})({row.price}),"
             total+=int(row.price)
+        row=stores_orders_database(store_order_id=k+1,store_order_details=p,store_order_total=total,store_id=1)
+        db.session.add(row)
+        db.session.commit()
     tdb=temp_database.query.all()
     gtotal=0
     for row in tdb:
