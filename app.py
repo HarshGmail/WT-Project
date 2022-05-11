@@ -37,7 +37,12 @@ class inventory_database(db.Model):
 class suppliers_database(db.Model):
     supplier_id=db.Column(db.Integer,primary_key=True)
     supplier_name=db.Column(db.String(30),nullable=False)
-    supplier_credit=db.Column(db.Integer,nullable=False)
+    supplier_supply_items=db.Column(db.Integer,nullable=False)
+
+class credit_database(db.Model):
+    supplier_id=db.Column(db.Integer,primary_key=True)
+    supplier_supplied_amount=db.Column(db.Integer,nullable=False)
+    supplier_credit_limit=db.Column(db.Integer,nullable=False)
 
 class employee_database(db.Model):
     employee_id=db.Column(db.Integer,primary_key=True)
@@ -69,6 +74,7 @@ class stores_orders_database(db.Model):
     store_order_details=db.Column(db.String(1000),nullable=False)
     store_order_total=db.Column(db.Integer,nullable=False)
     store_id=db.Column(db.String(12),nullable=False)
+    store_order_profit_total=db.Column(db.Integer,nullable=False)
 
 class temp_database(db.Model):
     sno=db.Column(db.Integer,primary_key=True)
@@ -98,9 +104,6 @@ def loginpage():
 "...............Menu Page................"
 @app.route("/menu",methods=["GET","POST"])
 def menu():
-    if request.method=="POST":
-        if request.form["inventory"]:
-            return redirect(url_for("inventory"))
     return render_template("menu.html")
 
 
@@ -177,6 +180,8 @@ def inventory_updation():
         return redirect(url_for("inventory"))
     return render_template("inventory_updation.html")
 
+
+
 """...............Staff................."""
 @app.route("/staff",methods=["GET","POST"])
 def staff():
@@ -244,9 +249,8 @@ def salary():
 """..............Tax Management.................."""
 @app.route("/tax_management",methods=["GET","POST"])
 def tax_management():
-    if request.method=="POST":
-        pass
-    return render_template("tax_management.html")
+    sod=stores_orders_database.query.all()
+    return render_template("tax_management.html",sod=sod)
 
 
 
@@ -276,7 +280,7 @@ def credit_info():
 
 
 
-
+"""................Billing Interface..................."""
 @app.route("/billinginterface",methods=["GET","POST"])
 def billinginterface():
     if request.method=="POST":
@@ -311,12 +315,11 @@ def billinginterface():
     tdb=temp_database.query.all()
     return render_template("billinginterface.html",tdb=tdb)
 
-
-
 @app.route("/billpreview",methods=["GET","POST"])
 def billpreview():
     if request.method=="POST":
         tdb=temp_database.query.all()
+        idb=inventory_database.query.all()
         ttdb=tdb
         for row in tdb:
             db.session.delete(row)
@@ -326,17 +329,22 @@ def billpreview():
         for row in sod:
             s=row.store_order_id
         if s=="":
-            k=0
+            k=1 
         else:
             k=int(s)+1
         p=""
         total=0
+        profit=0
         for row in ttdb:
-            p=p+f"{row.name}({row.qty})({row.price}),"
+            p=p+f"{row.id}-{row.name}({row.qty})({row.price}),"
             total+=int(row.price)
-        row=stores_orders_database(store_order_id=k+1,store_order_details=p,store_order_total=total,store_id=1)
+            for r in idb:
+                if int(r.item_id)==int(row.id):
+                    profit+=(r.item_selling_price-r.item_costprice)*row.qty
+        row=stores_orders_database(store_order_id=k+1,store_order_details=p,store_order_total=total,store_id=1,store_order_profit_total=profit)
         db.session.add(row)
         db.session.commit()
+        return redirect(url_for("billinginterface"))
     tdb=temp_database.query.all()
     gtotal=0
     for row in tdb:

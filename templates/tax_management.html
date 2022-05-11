@@ -4,9 +4,139 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tax Management</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body{
+            background-image:url("https://c.tenor.com/MiiSaoOtKHgAAAAC/black-background.gif");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .container1{
+            position: absolute;
+            background-color: rgb(241, 235, 235);
+            right: 300px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 15px;
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto auto;
+            height: 210px;
+            width: 700px;
+            border: 1px solid black;
+        }
+        .container1 > div{
+            background-color: lightgoldenrodyellow;
+            border: 1px solid black;
+        }
+        .container1-2{
+            position: absolute;
+            background-color: rgb(236, 111, 111);
+            right :300px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto auto;
+            height: 120px;
+            width: 700px;
+            border: 1px solid black;
+        }
+        .container1-2 > div{
+            background-color: lightyellow;
+            border: 1px solid black;
+        }
+        .container2{
+            display: grid;
+            height: 100px;
+            width: 200px;
+            grid-template-areas: 
+            'menu menu menu menu header header'
+            'menu menu menu menu main main'
+            'menu menu menu menu main main';
+        }
+        .item1{
+            grid-area: header;
+            text-decoration: solid;
+        }
+        .item2{
+            grid-area: menu;
+        }
+        .item2-1{
+            grid-area: menu;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-position: 1% 1%;
+            background-attachment: fixed;
+        }
+        .item3{
+            grid-area: main;
+        }
+        .container3{
+            position: absolute;
+            right: 80px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            column-gap: 15px;
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto auto;
+            height: 120px;
+            width: 1100px;
+            border: 1px solid black;
+        }
+        .container3 > div{
+            background-color: lightgoldenrodyellow;
+            border: 1px solid black;
+        }
+        .navbar{
+            width:100%;
+            z-index:10;
+            opacity:0.5;
+        }
+    </style>
 </head>
 <body>
-    
+    <nav id ="nav" class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">StoreBook</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="menu">Menu</a></li>
+            <li><a href="customer_interface">Customer Interface</a></li>
+            <li><a href="staff">Staff</a></li>
+            <li><a href="credits">Credits</a></li>
+          </ul>
+        </div>
+    </nav>   
+    <div class="container" style="background-color:white; width:1000px">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" style="width:10px">Sno.</th>
+                <th scope="col" style="width:700px">Bill Description</th>
+                <th scope="col" style="width:50px">Bill Total</th>
+                <th scope="col" style="width:50px">Profit</th>
+                <th scope="col" style="width:70px">Tax payable</th>
+              </tr>
+            </thead>
+            <tbody>
+                {%for row in sod%}
+              <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{row.store_order_details}}</td>
+                <td>{{row.store_order_total}}</td>
+                <td>{{row.store_order_profit_total}}</td>
+                <td>{{(row.store_order_profit_total*18)/100}}</td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+        </div> 
 </body>
 </html>
