@@ -1,4 +1,5 @@
 import email
+from datetime import datetime
 from flask import Flask, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask,render_template,request,redirect, url_for
@@ -41,6 +42,8 @@ class suppliers_database(db.Model):
 
 class credit_database(db.Model):
     supplier_id=db.Column(db.Integer,primary_key=True)
+    supplier_credit_given_date=db.Column(db.DateTime,default=datetime.utcnow)
+    supplier_name=db.Column(db.Integer,nullable=False)
     supplier_supplied_amount=db.Column(db.Integer,nullable=False)
     supplier_credit_limit=db.Column(db.Integer,nullable=False)
 
@@ -276,6 +279,22 @@ def credit_info():
     if request.method=="POST":
         pass
     return render_template("credit_info.html")
+
+@app.route("/supplieraddition",methods=["GET","POST"])
+def supplieraddition():
+    if request.method=="POST":
+        supplier_id=request.form["supplierid"]
+        supplier_name=request.form["suppliername"]
+        supplier_items=request.form["supplieritems"]
+        row=suppliers_database(supplier_id=supplier_id,supplier_name=supplier_name,supplier_supply_items=supplier_items)
+        db.session.add(row)
+        db.session.commit()
+        return redirect(url_for("credits"))
+    return render_template("supplieraddition.html")
+
+@app.route("/newcredittransaction",methods=["GET","POST"])
+def newcredittransaction():
+    return render_template("newcredittransaction.html")
 
 
 

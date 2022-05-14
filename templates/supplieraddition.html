@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credits</title>
+    <title>New Supplier Addition</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         body{
@@ -133,23 +133,13 @@
             height:228px;
             margin-left: 0px;
         }
-        .button_r{
-            margin-left: 455px;
-        }
-        h3{
-            text-align: center;
-            color: white;
-            font-family: "Bungee", cursive;
-            width:100%;
-            z-index:1;
-        }
     </style>
 </head>
 <body>
-    <!-- <div class="container1">
+    <div class="container1">
         <div class="container2">
             <div class="item1">
-                <b style ="font-size: 30px; color: aliceblue;">Enter the details of the new item</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 2px solid rgb(250, 247, 247); padding-left: 0%; padding-right:0%;" color="solid black">
+                <b style ="font-size: 30px; color: aliceblue;">Enter the details of the new Supplier</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 2px solid rgb(250, 247, 247); padding-left: 0%; padding-right:0%;" color="solid black">
             </div>
             <div class="item2-1">
                 <input type="image" id ="10"  name="submit" src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-businessman-avatar-icon-flat-style-png-image_1917273.jpg" alt="Submit" style="border-right: 2px white;border-bottom: 2px rgb(250, 247, 247);border-top: 2px rgb(250, 247, 247);"/>
@@ -158,63 +148,19 @@
                 <div class="container121">
                     <form style="margin-top:10px;" method="POST">
                         <div class="form-group">
-                            <input type="text" class="form-control" style="opacity: 0.6;" name="itemid" placeholder="Item id">
+                            <input type="text" class="form-control" style="opacity: 0.6;" name="supplierid" placeholder="Supplier id">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" style="opacity: 0.6;" name="itemname" placeholder="Item Name">
+                            <input type="text" class="form-control" style="opacity: 0.6;" name="suppliername" placeholder="Supplier Name">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" style="opacity: 0.6;" name="costprice" placeholder="Cost Price">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" style="opacity: 0.6;"name="sellingprice" placeholder="Selling Price">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" style="opacity: 0.6;"name="availableunits" placeholder="Available Units">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" style="opacity: 0.6;"name="maxunits" placeholder="Max Capacity">
+                            <input type="text" class="form-control" style="opacity: 0.6;" name="supplieritems" placeholder="Supplying Items">
                         </div>
                         <button type="submit" style="opacity: 0.6;" class="btn btn-dark">Submit</button>
                       </form>
                 </div>
             </div>
           </div>
-    </div> -->
-    <h3>Total Inventory</h3>
-    <div class="button_r">
-    <a href="supplieraddition"><button>New Supplier Addition</button></a> <a href="newcredittransaction"><button>New Credit addition</button></a>
-     <!--<a href="">Pay off</a>-->
     </div>
-    <div class="container" style="background-color:white; width:1000px">
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col" style="width:10px">Sno.</th>
-                <th scope="col" style="width:100px">Date</th>
-                <th scope="col" style="width:300px">Supplier Name</th>
-                <th scope="col" style="width:100px">Amount</th>
-                <th scope="col" style="width:100px">Days Left</th>
-              </tr>
-            </thead>
-            <tbody>
-                <!-- {%for row in tdb%} -->
-              <tr>
-                <!-- <th scope="row">{{row.sno}}</th> -->
-                <!-- <td>{{row.name}}</td>
-                <td>{{row.qty}}</td>
-                <td>{{row.sp}}</td>
-                <td>{{row.price}}</td> -->
-              </tr>
-              <!-- {%endfor%}
-              <tr>
-                  <th>-</th>
-                  <td></td>
-                  <td></td>
-                  <td>Grand Total=</td>
-                  <td>{{gtotal}}</td>
-              </tr> -->
-            </tbody>
-          </table>
 </body>
 </html>
