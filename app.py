@@ -26,6 +26,10 @@ class user_database(db.Model):
     sno=db.Column(db.Integer,primary_key=True)
     user_name=db.Column(db.String(10),nullable=False)
     user_password=db.Column(db.String(20),nullable=False)
+    user_type=db.Column(db.String(20),nullable=False)
+    user_phone_number=db.Column(db.String(15),nullable=False)
+    user_address=db.Column(db.String(200),nullable=False)
+
 
 class inventory_database(db.Model):
     item_id=db.Column(db.Integer,primary_key=True)
@@ -86,7 +90,13 @@ class temp_database(db.Model):
     qty=db.Column(db.Integer,nullable=False)
     sp=db.Column(db.Integer,nullable=False)
     price=db.Column(db.Integer,nullable=False)
-    
+
+class orders_database(db.Model):
+    sno=db.Column(db.Integer,primary_key=True)
+    store_id=db.Column(db.Integer,nullable=False)
+    order_items_id=db.Column(db.String(1500),nullable=False)
+    customer_id=db.Column(db.Integer,nullable=False)
+    order_total=db.Column(db.Integer,nullable=False)
 db.create_all()
 
 ".............Login Page.............."
@@ -98,6 +108,10 @@ def loginpage():
         if username=="Harsh" and password=="Harsh@123":
             return redirect(url_for("menu"))
     return render_template("login.html")
+
+@app.route("/signup",methods=["GET","POST"])
+def signup():
+    return render_template("signup.html")
 
 
 """"".......................................DEALER SIDE........................................."""""
@@ -270,9 +284,8 @@ def customer_interface():
 """Credit given and taken"""
 @app.route("/credits",methods=["GET","POST"])
 def credits():
-    if request.method=="POST":
-        pass
-    return render_template("credits.html")
+    cdb=credit_database.query.all()
+    return render_template("credits.html",cdb=cdb)
 
 @app.route("/credit_info",methods=["GET","POST"])
 def credit_info():
@@ -294,6 +307,24 @@ def supplieraddition():
 
 @app.route("/newcredittransaction",methods=["GET","POST"])
 def newcredittransaction():
+    if request.method=="POST":
+        supplier_id=request.form["supplierid"]
+        amount=request.form["amount"]
+        days=request.form["creditdays"]
+        sdb=suppliers_database.query.all()
+        name=""
+        for row in sdb:
+            if int(row.supplier_id)==int(supplier_id):
+                name=row.supplier_name
+        row=credit_database.query.filter_by(supplier_id=supplier_id).first()
+        if row:
+            row.supplier_supplied_amount=int(row.supplier_supplied_amount)+int(amount)
+            row.supplier_credit_limit=int(row.supplier_credit_limit)+int(days)
+        else:
+            row=credit_database(supplier_id=supplier_id,supplier_name=name,supplier_supplied_amount=amount,supplier_credit_limit=days)
+        db.session.add(row)
+        db.session.commit()
+        return redirect(url_for("credits"))
     return render_template("newcredittransaction.html")
 
 
@@ -375,6 +406,19 @@ def billpreview():
 
 """""......................................CUSTOMER SIDE........................................"""""
 """..............................................................................................."""
+@app.route("/customerhomepage",methods=["GET","POST"])
+def customerhomepage():
+    return render_template("customerhomepage.html")
+
+
+@app.route("/customerstorepage",methods=["GET","POST"])
+def customerstorepage():
+    return render_template("customerstorepage.html")
+
+
+@app.route("/customerorderconfirmationpage",methods=["GET","POST"])
+def customerorderconfirmationpage():
+    return render_template("customerorderconfirmationpage.html")
 
 
 if __name__=="__main__":
