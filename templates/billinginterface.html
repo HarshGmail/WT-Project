@@ -104,10 +104,10 @@
             <a class="navbar-brand" href="#">StoreBook</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="menu">Menu</a></li>
-            <li><a href="customer_interface">Customer Interface</a></li>
-            <li><a href="staff">Staff</a></li>
-            <li><a href="credits">Credits</a></li>
+            <li class="active"><a href="/menu/{{sid}}/{{username}}">Menu</a></li>
+            <li><a href="/customer_interface/{{username}}">Customer Interface</a></li>
+            <li><a href="/staff/{{username}}">Staff</a></li>
+            <li><a href="/credits/{{username}}">Credits</a></li>
           </ul>
         </div>
     </nav>
@@ -153,7 +153,7 @@
           </table>
         </div>
         <form method="POST1">
-            <a type="submit" href="billpreview" class="btn btn-dark" style="color:white; background-color:black">Generate bill</a>
+            <a type="submit" href="/billpreview/{{username}}" class="btn btn-dark" style="color:white; background-color:black">Generate bill</a>
         </form>
 </body>
 </html>

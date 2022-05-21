@@ -121,25 +121,26 @@
 </head>
 <body>
     <!--Navigation Bar-->
-    <nav id ="nav" class="navbar navbar-inverse sticky-top">
+    <nav id ="nav" class="navbar navbar-inverse">
         <div class="container-fluid">
-        <div class="navbar-header">
+          <div class="navbar-header">
             <a class="navbar-brand" href="#">StoreBook</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="menu">Menu</a></li>
-            <li><a href="customer_interface">Customer Interface</a></li>
-            <li><a href="staff">Staff</a></li>
-            <li><a href="credits">Credits</a></li>
-        </ul>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/menu/{{sid}}/{{username}}">Menu</a></li>
+            <li><a href="/customer_interface/{{username}}">Customer Interface</a></li>
+            <li><a href="/staff/{{username}}">Staff</a></li>
+            <li><a href="/credits/{{username}}">Credits</a></li>
+          </ul>
         </div>
     </nav>
     <h1>...Staff...</h1>
     <div class="button_r">
-        <a href="staff_newemployee_addition"><button>Add new Employee</button></a> <a href="staff_employee_modification"><button>Modify Details of an Employee</button></a>
+        <a href="/staff_newemployee_addition/{{username}}"><button>Add new Employee</button></a> <a href="/staff_employee_modification/{{username}}"><button>Modify Details of an Employee</button></a>
     </div>
     <div class="container1">
         {%for row in edb%}
+        {%if row.store_id==sid%}
         <div class="container2">
             <div class="item1">
                 <b style ="font-size: 20px;">id:{{row.employee_id}}</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 1px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
@@ -150,12 +151,13 @@
             </div>
             <div class="item3">
                 <b>Name: {{row.employee_name}}</b><br>
-                <b>Designation: {{row.employee_designation}}</b><br>
+                <b>Designation: {{row.employee_department}}</b><br>
                 <b>DOB: {{row.employee_dob}}</b><br>
                 <b>Sex: {{row.employee_sex}}</b><br>
                 <b>Blood Group: {{row.employee_bloodgroup}}</b>
             </div>
         </div>
+        {%endif%}
         {%endfor%}
     </div>
 </body>

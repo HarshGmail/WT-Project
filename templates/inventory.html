@@ -217,10 +217,10 @@
             <a class="navbar-brand" href="#">StoreBook</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="menu">Menu</a></li>
-            <li><a href="customer_interface">Customer Interface</a></li>
-            <li><a href="staff">Staff</a></li>
-            <li><a href="credits">Credits</a></li>
+            <li class="active"><a href="/menu/{{sid}}/{{username}}">Menu</a></li>
+            <li><a href="/customer_interface/{{username}}">Customer Interface</a></li>
+            <li><a href="/staff/{{username}}">Staff</a></li>
+            <li><a href="/credits/{{username}}">Credits</a></li>
           </ul>
         </div>
     </nav>
@@ -367,16 +367,17 @@
         </div>
     </div> -->
     <!-- <br><br><br><br><br><br><br> -->
-    <h3>Total Inventory</h3>
-    <div class="button_r"><a href="inventory_add_item_page"><button>Add an Item</button></a> <a href="inventory_modify_item"><button>Modify an Item</button></a> <a href="inventory_updation"><button>Inventory Updation</button></a></div>
+    <h3>{{storename}}'s total Inventory</h3>
+    <div class="button_r"><a href="/inventory_add_item_page/{{sid}}/{{username}}"><button>Add an Item</button></a> <a href="/inventory_modify_item/{{sid}}/{{username}}"><button>Modify an Item</button></a> <a href="/inventory_updation//{{sid}}/{{username}}"><button>Inventory Updation</button></a></div>
     <div class="container3">
         {% for row in idb%}
+        {%if row.store_id==sid%}
         <div class="container2">
             <div class="item1">
                 <b>{{row.item_name}}</b><hr style="size:1px;color:#151515;border:1px solid black; margin-top:0%;margin-bottom:0%" color="balck">
             </div>
             <div class="item2-1" >
-                <input type="image" id="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:60px; height:98px;"/>
+                <input type="image" id="14" name="submit" src="/static/mobileimg.jpg" alt="Submit" style="width:60px; height:98px;"/>
             </div>
             <div class="item3">
                 <b>Available:{{row.item_available_number}}</b><br>
@@ -385,6 +386,7 @@
                 <b>Profit:₹{{row.item_selling_price-row.item_costprice}}</b>
             </div>
         </div>
+        {%endif%}
         {%endfor%}
     </div>
 </body>

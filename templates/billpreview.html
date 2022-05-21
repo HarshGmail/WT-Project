@@ -19,10 +19,10 @@
             <a class="navbar-brand" href="#">StoreBook</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="menu">Menu</a></li>
-            <li><a href="customer_interface">Customer Interface</a></li>
-            <li><a href="staff">Staff</a></li>
-            <li><a href="credits">Credits</a></li>
+            <li class="active"><a href="/menu/{{sid}}/{{username}}">Menu</a></li>
+            <li><a href="/customer_interface/{{username}}">Customer Interface</a></li>
+            <li><a href="/staff/{{username}}">Staff</a></li>
+            <li><a href="/credits/{{username}}">Credits</a></li>
           </ul>
         </div>
     </nav>
@@ -39,6 +39,7 @@
             </thead>
             <tbody>
                 {%for row in tdb%}
+                {%if row.store_id==sid%}
               <tr>
                 <th scope="row">{{row.sno}}</th>
                 <td>{{row.name}}</td>
@@ -46,6 +47,7 @@
                 <td>{{row.sp}}</td>
                 <td>{{row.price}}</td>
               </tr>
+              {%endif%}
               {%endfor%}
               <tr>
                   <th>-</th>

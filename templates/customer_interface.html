@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory</title>
+    <title>Customer Interface</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script>
         window.onload = function() {
@@ -217,10 +217,10 @@
             <a class="navbar-brand" href="#">StoreBook</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="menu">Menu</a></li>
-            <li><a href="customer_interface">Customer Interface</a></li>
-            <li><a href="staff">Staff</a></li>
-            <li><a href="credits">Credits</a></li>
+            <li class="active"><a href="/menu/{{sid}}/{{username}}">Menu</a></li>
+            <li><a href="/customer_interface/{{username}}">Customer Interface</a></li>
+            <li><a href="/staff/{{username}}">Staff</a></li>
+            <li><a href="/credits/{{username}}">Credits</a></li>
           </ul>
         </div>
     </nav>
@@ -367,10 +367,11 @@
         </div>
     </div> -->
     <!-- <br><br><br><br><br><br><br> -->
-    <h3>Welcome to XYZ Store!</h3>
+    <h3>Welcome!</h3>
     <!-- <div class="button_r"><a href="inventory_add_item_page"><button>Add an Item</button></a> <a href="inventory_modify_item"><button>Modify an Item</button></a> <a href="inventory_updation"><button>Inventory Updation</button></a></div> -->
     <div class="container3">
         {% for row in idb%}
+        {%if row.store_id==sid%}
         <div class="container2">
             <div class="item1">
                 <b>{{row.item_name}}</b><hr style="size:1px;color:#151515;border:1px solid black; margin-top:0%;margin-bottom:0%" color="balck">
@@ -385,6 +386,7 @@
                 <!-- <b>Profit:₹{{row.item_selling_price-row.item_costprice}}</b> -->
             </div>
         </div>
+        {%endif%}
         {%endfor%}
     </div>
 </body>

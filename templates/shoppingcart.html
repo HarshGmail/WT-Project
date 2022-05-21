@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping cart</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        .container{
+            width: 800px;
+            margin-top: 70px;
+        }
+    </style>
+</head>
+<body>
+    <h3 style="color:white;margin-left:550px">Shopping cart</h3>
+    <div class="container">
+        <div class="container" style="background-color:white; width:1000px; margin-left:120px;">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width:10px">Sno.</th>
+                    <th scope="col" style="width:800px">Name</th>
+                    <th scope="col" style="width:50px">Qty</th>
+                    <th scope="col" style="width:100px">SP</th>
+                    <th scope="col" style="width:120px">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {%for row in tdb%}
+                    {%if row.store_id==sid%}
+                  <tr>
+                    <th scope="row">{{row.sno}}</th>
+                    <td>{{row.name}}</td>
+                    <td>{{row.qty}}</td>
+                    <td>{{row.sp}}</td>
+                    <td>{{row.price}}</td>
+                  </tr>
+                  {%endif%}
+                  {%endfor%}
+                  <tr>
+                      <th>-</th>
+                      <td></td>
+                      <td></td>
+                      <td>Grand Total=</td>
+                      <td>{{gtotal}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <br>
+            <div style="margin-left: 600px;">
+                <form method="POST">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="pickuptime" style="margin-left: -135px;width:350px;" placeholder="if you want to pick later mention the time else leave empty">
+                      </div>
+                    <button type="submit" class="btn btn-dark" style="color:black; background-color:white">checkout</button>
+                </form>
+            </div>
+    </div>
+</body>
+</html>

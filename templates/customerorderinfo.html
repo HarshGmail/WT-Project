@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="custom.css"/>
+    <title>Product info</title>
+    <style>
+        body{
+            /* background-color: aqua; */
+            /* grid-template-rows: auto auto; */
+            background-color: #151515;
+            background-image:url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOmyQWfHPGF1fW0gEWIM92FskCgmqE5e0Dwg&usqp=CAU");
+            background-repeat: no-repeat;
+            background-position: 100% 100%;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        .navbar{
+            opacity:0.5
+        } 
+        .container1{
+            position: absolute;
+            right: 290px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            display: inline-grid;
+            grid-template-columns: auto;
+            height: 230px;
+            width: 730px;
+        }
+        .container1 > div{
+            background-color: rgba(231, 182, 22, 0.655);
+            border: 2px solid black;
+        }
+        .container2{
+            display: grid;
+            height: 230px;
+            grid-template-areas: 
+            'menu menu menu menu menu header header header header header header header'
+            'menu menu menu menu menu main main main main main main main'
+            'menu menu menu menu menu main main main main main main main';
+        }
+        .item1{
+            grid-area: header;
+            
+        }
+        .item2{
+            grid-area: menu;
+        }
+        .item2-1{
+            grid-area: menu;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-position: 1% 1%;
+            background-attachment: fixed;
+        }
+        .item2-1>input{
+            height:226px;
+            width:210px;
+        }
+        .item3{
+            grid-area: main;
+        }
+        .container12{
+            position: absolute;
+            right: 195px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            display: inline-grid;
+            grid-template-columns: auto;
+            height: 230px;
+            width: 930px;
+        }
+        .container12 > div{
+            background-color: rgb(179, 169, 238);
+            border: 2px solid black;
+        }
+        .tab{
+            tab-size: 2;
+        }
+        .container{
+            width: 800px;
+            margin-top: 250px;
+        }
+    </style>
+</head>
+<body>
+    <br><br>
+    <div class="container1">
+        <div class="container2">
+          <div class="item1">
+              <b style ="font-size: 30px;">{{row.item_name}}</b><hr style=" margin-top: 0%; margin-bottom: 0%; border: 2px solid black; padding-left: 0%; padding-right:0%;" color="solid black">
+          </div>
+          <div class="item2-1">
+              <input type="image" id ="10"  name="submit" src="/static/orange.jpg" alt="Submit" style="border-right: 2px solid black;"/>
+              <!--<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80">-->
+          </div>
+          <div class="item3">
+              <h4><b>cost:{{row.item_costprice}}</b></h4><br>
+              <h4><b>Available number: {{row.item_available_number}}</b></h4><br>
+          </div>
+        </div>
+    </div>
+    <br><br><br>
+    <div class="container">
+        <form method="POST">
+            <div class="form-group">
+              <input type="text" class="form-control" name="qty" placeholder="Enter the quantity you want to buy">
+            </div>
+            <button type="submit" class="btn btn-dark" style="color: white; background-color:#151515; margin-left:350px;">Submit</button>
+          </form>
+        </div>
+</body>
+</html>

@@ -157,10 +157,10 @@
             <a class="navbar-brand" href="#">StoreBook</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="menu">Menu</a></li>
-            <li><a href="customer_interface">Customer Interface</a></li>
-            <li><a href="staff">Staff</a></li>
-            <li><a href="credits">Credits</a></li>
+            <li class="active"><a href="/menu/{{sid}}/{{username}}">Menu</a></li>
+            <li><a href="/customer_interface/{{username}}">Customer Interface</a></li>
+            <li><a href="/staff/{{username}}">Staff</a></li>
+            <li><a href="/credits/{{username}}">Credits</a></li>
           </ul>
         </div>
     </nav>
@@ -201,7 +201,7 @@
     </div> -->
     <h3>Credits</h3>
     <div class="button_r">
-    <a href="supplieraddition"><button>New Supplier Addition</button></a> <a href="newcredittransaction"><button>New Credit addition</button></a>
+    <a href="/supplieraddition/{{username}}"><button>New Supplier Addition</button></a> <a href="/newcredittransaction/{{username}}"><button>New Credit addition</button></a>
      <!--<a href="">Pay off</a>-->
     </div>
     <div class="container" style="background-color:white; width:1000px">
@@ -209,14 +209,15 @@
             <thead>
               <tr>
                 <th scope="col" style="width:10px">SID.</th>
-                <th scope="col" style="width:100px">Date</th>
-                <th scope="col" style="width:300px">Supplier Name</th>
+                <th scope="col" style="width:150px">Date</th>
+                <th scope="col" style="width:250px">Supplier Name</th>
                 <th scope="col" style="width:100px">Amount</th>
                 <th scope="col" style="width:100px">Days Left</th>
               </tr>
             </thead>
             <tbody>
                 {%for row in cdb%}
+                {%if row.store_id==sid%}
               <tr>
                 <th scope="row">{{row.supplier_id}}</th>
                 <td>{{row.supplier_credit_given_date}}</td>
@@ -224,6 +225,7 @@
                 <td>{{row.supplier_supplied_amount}}</td>
                 <td>{{row.supplier_credit_limit}}</td>
               </tr>
+              {%endif%}
               {%endfor%}
             </tbody>
           </table>

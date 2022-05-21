@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script>
+        window.onload = function() {
+        document.getElementById("14").addEventListener('click', function (e) {
+            var img = document.createElement('img');
+            img.setAttribute('src', 'inventory_order');
+            e.target.appendChild(img);
+            window.open("inventory_order");
+            });
+        };
+        var startProductBarPos=-1;
+        window.onscroll=function(){
+        var bar = document.getElementById('nav');
+        if(startProductBarPos<0)startProductBarPos=findPosY(bar);
+
+        if(pageYOffset>startProductBarPos){
+            bar.style.position='fixed';
+            bar.style.top=0;
+        }else{
+            bar.style.position='relative';
+        }
+
+        };
+    </script>
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+        #down {
+            margin-top: 100%;
+            padding-bottom: 25%;
+        } 
+        
+        /*Navigation Bar*/
+        /* .topnav a {
+        float: left;
+        color: #161616;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        background-color: rgb(250, 248, 248)
+        }
+
+        .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+        }
+
+        .topnav a.active {
+        background-color: aqua;
+        color: black;
+        }*/
+
+        h2{
+            text-align: center;
+            color: white;
+            font-family: "Bungee", cursive;
+        }
+        h3{
+            text-align: center;
+            color: white;
+            font-family: "Bungee", cursive;
+            width:100%;
+            z-index:1;
+        }
+        pre{
+            background-color: aquamarine;
+            font-size: 8px;
+            height: 10px;
+            width: 100px;
+            padding: 7px;
+        }
+        
+       /* a {
+        font-family: "Bungee", cursive;
+        font-size: 1.6em;
+        }  */
+        
+        .background-image{
+        max-width: 100%;
+        max-height: 100%;
+        display: block; /* remove extra space below image */
+        }
+        body{
+            margin: 0;
+            height: 100vh;
+            /* background-color: aqua; */
+            /* grid-template-rows: auto auto; */
+            background-color: #151515;
+            background-image:url("https://wallpapercave.com/wp/wp2758145.gif");
+            background-repeat: no-repeat;
+            background-position: 100% 100%;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        .container1{
+            position: absolute;
+            background-color: rgb(241, 56, 56);
+            right: 300px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 15px;
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto auto;
+            height: 120px;
+            width: 700px;
+            border: 1px solid black;
+        }
+        .container1 > div{
+            background-color: lightgoldenrodyellow;
+            border: 1px solid black;
+        }
+        .container1-2{
+            position: absolute;
+            background-color: rgb(236, 111, 111);
+            right :300px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto auto;
+            height: 120px;
+            width: 700px;
+            border: 1px solid black;
+        }
+        .container1-2 > div{
+            background-color: lightyellow;
+            border: 1px solid black;
+        }
+        .container2{
+            display: grid;
+            height: 100px;
+            width: 200px;
+            grid-template-areas: 
+            'menu menu menu menu header header'
+            'menu menu menu menu main main'
+            'menu menu menu menu main main';
+        }
+        .item1{
+            grid-area: header;
+            text-decoration: solid;
+        }
+        .item2{
+            grid-area: menu;
+        }
+        .item2-1{
+            grid-area: menu;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-position: 1% 1%;
+            background-attachment: fixed;
+        }
+        .item3{
+            grid-area: main;
+        }
+        .container3{
+            position: absolute;
+            right: 80px;
+            padding: 10px;
+            display: grid;
+            gap: 10px;
+            row-gap: 10px;
+            column-gap: 15px;
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto auto;
+            height: 120px;
+            width: 1100px;
+            border: 1px solid black;
+        }
+        .container3 > div{
+            background-color: lightgoldenrodyellow;
+            border: 1px solid black;
+        }
+        img{
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 42px;
+            height: 96px;
+            }
+        .tab{
+            tab-size: 2;
+        }
+        .navbar{
+            opacity:0.5;
+            width:100%;
+            z-index:10;
+        }
+        .button_r{
+            margin-left: 455px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <!-- <div class="topnav">
+        <a class="active" href="menu">Menu</a>
+        <a href="staff">Staff</a>
+        <a href="salary">Salaries</a>
+        <a href="billinginterface">Billing Interface</a>
+      </div> -->
+    <!-- <nav id ="nav" class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">StoreBook</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/menu/{{sid}}/{{username}}">Menu</a></li>
+            <li><a href="/customer_interface/{{username}}">Customer Interface</a></li>
+            <li><a href="/staff/{{username}}">Staff</a></li>
+            <li><a href="/credits/{{username}}">Credits</a></li>
+          </ul>
+        </div>
+    </nav> -->
+    <!-- Inventory -->
+    <!-- <h2>Inventory</h2>
+    <br>
+    <div class="button_r">
+    <a href="inventory_add_item_page"><button>Add an Item</button></a> <a href="inventory_modify_item"><button>Modify an Item</button></a> <a href="inventory_modify_item"><button>Inventory Updation</button></a></div>
+    <p style="padding:0px 250px 0px; color: white">These items are low on stock!</p>
+    <div class="container1">
+        <div class="container2">
+            <div class="item1">
+                Mobile
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="10"  name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
+            </div>
+            <div class="item3">
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                Mobile
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="11" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
+            </div>
+            <div class="item3">
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                Mobile
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="12" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
+            </div>
+            <div class="item3">
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                Mobile
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="13" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
+            </div>
+            <div class="item3">
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                Mobile
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
+            </div>
+            <div class="item3">
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br> -->
+    <!-- <p style="padding:0px 250px 0px; color: white">These items are about to run low!</p>
+    <div class="container1-2">
+        <div class="container2">
+            <div class="item1">
+                Mobile
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
+            </div>
+            <div class="item3">
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                Mobile
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
+            </div>
+            <div class="item3">
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                Mobile
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
+            </div>
+            <div class="item3">
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                Mobile
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
+            </div>
+            <div class="item3">
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
+            </div>
+        </div>
+        <div class="container2">
+            <div class="item1">
+                Mobile
+            </div>
+            <div class="item2-1">
+                <input type="image" id ="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:42px; height:98px;"/>
+            </div>
+            <div class="item3">
+                Available:10<br>
+                Sold:40<br>
+                cost:10000
+            </div>
+        </div>
+    </div> -->
+    <!-- <br><br><br><br><br><br><br> -->
+    <h3>Total Inventory</h3>
+    <div class="button_r"><a href="/staffinventoryaddnewitem/{{sid}}/{{username}}"><button>Add an Item</button></a> <a href="/inventory_modify_item/{{sid}}/{{username}}"><button>Modify an Item</button></a> <a href="/inventory_updation//{{sid}}/{{username}}"><button>Inventory Updation</button></a></div>
+    <div class="container3">
+        {% for row in idb%}
+        {%if row.store_id==sid%}
+        <div class="container2">
+            <div class="item1">
+                <b>{{row.item_name}}</b><hr style="size:1px;color:#151515;border:1px solid black; margin-top:0%;margin-bottom:0%" color="balck">
+            </div>
+            <div class="item2-1" >
+                <input type="image" id="14" name="submit" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&w=1000&q=80" alt="Submit" style="width:60px; height:98px;"/>
+            </div>
+            <div class="item3">
+                <b>Available:{{row.item_available_number}}</b><br>
+                <b>Sold:{{row.item_max_units-row.item_available_number}}</b><br>
+                <b>SP:₹{{row.item_selling_price}}</b><br>
+                <b>Profit:₹{{row.item_selling_price-row.item_costprice}}</b>
+            </div>
+        </div>
+        {%endif%}
+        {%endfor%}
+    </div>
+</body>
+</html>
