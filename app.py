@@ -22,7 +22,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 """........................................Databases.............................................."""
 db = SQLAlchemy(app)
 
-
 class user_database(db.Model):
     sno=db.Column(db.Integer,primary_key=True)
     user_name=db.Column(db.String(10),nullable=False)
@@ -110,8 +109,17 @@ class orders_database(db.Model):
     store_order_total=db.Column(db.Integer,nullable=False)
 
 db.create_all()
+"""................................................................................................."""
+"""................................................................................................."""
+"""................................................................................................."""
 
-".............Login Page.............."
+
+
+
+
+
+
+"...........................................Login Page..............................................."
 @app.route("/",methods=["GET","POST"]) 
 def loginpage():
     if request.method=="POST":
@@ -212,16 +220,17 @@ def signup_store(username):
         db.session.commit()
         return redirect(url_for("inventory",username=username,storename=storename))
     return render_template("signup_store.html",username=username)
+"""................................................................................................."""
+"""................................................................................................."""
+"""................................................................................................."""
+
+
+
+
+
+
+
 """"".......................................DEALER SIDE........................................."""""
-"""..............................................................................................."""
-
-
-"...............Menu Page................"
-@app.route("/menu/<sid>/<username>",methods=["GET","POST"])
-def menu(sid,username):
-    store_id=int(sid)
-    return render_template("menu.html",sid=store_id,username=username)
-
 def findstoreid(username):
     alr=store_database.query.all()
     store_id=1
@@ -239,6 +248,23 @@ def findstoreidstaff(username):
             store_id=row.store_id
             break
     return int(store_id)
+"""................................................................................................."""
+"""................................................................................................."""
+"""................................................................................................."""
+
+
+
+
+
+
+"""............................................Menu Page............................................"""
+@app.route("/menu/<sid>/<username>",methods=["GET","POST"])
+def menu(sid,username):
+    store_id=int(sid)
+    return render_template("menu.html",sid=store_id,username=username)
+"""................................................................................................."""
+"""................................................................................................."""
+"""................................................................................................."""
 
 
 
@@ -249,8 +275,7 @@ def findstoreidstaff(username):
 
 
 
-
-"""..............Inventory.................."""
+"""..........................................Inventory.............................................."""
 @app.route("/inventory/<username>",methods=["GET","POST"])
 def inventory(username):
     allrows=inventory_database.query.all()
@@ -329,6 +354,9 @@ def inventory_updation(sid,username):
         db.session.commit()
         return redirect(url_for("inventory",username=username))
     return render_template("inventory_updation.html")
+"""................................................................................................."""
+"""................................................................................................."""
+"""................................................................................................."""
 
 
 
@@ -346,8 +374,7 @@ def inventory_updation(sid,username):
 
 
 
-
-"""...............Staff................."""
+"""...........................................Staff................................................."""
 @app.route("/staff/<username>",methods=["GET","POST"])
 def staff(username):
     store_id=int(findstoreid(username))
@@ -500,6 +527,9 @@ def staffinventoryaddnewitem(username,sid):
         db.session.commit()
         return redirect(url_for("staffinventory",username=username))
     return render_template("staffinventoryaddnewitem.html",username=username,sid=sid)
+"""................................................................................................."""
+"""................................................................................................."""
+"""................................................................................................."""
 
 
 
@@ -507,13 +537,15 @@ def staffinventoryaddnewitem(username,sid):
 
 
 
-
-"""............Salary payment..........."""
+""".........................................Salary payment........................................."""
 @app.route("/salary/<username>",methods=["GET","POST"])
 def salary():
     if request.method=="POST":
         pass
     return render_template("salary.html")
+"""................................................................................................."""
+"""................................................................................................."""
+"""................................................................................................."""
 
 
 
@@ -523,13 +555,15 @@ def salary():
 
 
 
-
-"""..............Tax Management.................."""
+""".........................................Tax Management.........................................."""
 @app.route("/tax_management/<username>",methods=["GET","POST"])
 def tax_management(username):
     store_id=findstoreid(username)
     sod=stores_orders_database.query.all()
     return render_template("tax_management.html",sod=sod,username=username,sid=store_id)
+"""................................................................................................."""
+"""................................................................................................."""
+"""................................................................................................."""
 
 
 
@@ -540,13 +574,15 @@ def tax_management(username):
 
 
 
-
-"""Customer Interface"""
+""".....................................Customer Interface.........................................."""
 @app.route("/customer_interface/<username>",methods=["GET","POST"])
 def customer_interface(username):
     allrows=inventory_database.query.all()
     store_id=int(findstoreid(username))
     return render_template("customer_interface.html",idb=allrows,sid=store_id,username=username)
+"""................................................................................................."""
+"""................................................................................................."""
+"""................................................................................................."""
 
 
 
@@ -556,8 +592,7 @@ def customer_interface(username):
 
 
 
-
-"""Credit given and taken"""
+"""....................................Credit given and taken......................................."""
 @app.route("/credits/<username>",methods=["GET","POST"])
 def credits(username):
     cdb=credit_database.query.all()
@@ -603,6 +638,9 @@ def newcredittransaction(username):
         db.session.commit()
         return redirect(url_for("credits",username=username))
     return render_template("newcredittransaction.html",username=username,sid=sid)
+"""................................................................................................."""
+"""................................................................................................."""
+"""................................................................................................."""
 
 
 
@@ -614,8 +652,7 @@ def newcredittransaction(username):
 
 
 
-
-"""................Billing Interface..................."""
+"""...................................Billing Interface............................................"""
 @app.route("/billinginterface/<username>",methods=["GET","POST"])
 def billinginterface(username):
     if request.method=="POST":
@@ -688,7 +725,9 @@ def billpreview(username):
     for row in tdb:
         gtotal+=int(row.price)
     return render_template("billpreview.html",tdb=tdb,gtotal=gtotal,sid=sid,username=username)
-
+"""................................................................................................."""
+"""................................................................................................."""
+"""................................................................................................."""
 
 
 
@@ -816,7 +855,9 @@ def shoppingcart(username,sid):
         
         return redirect(url_for("customerorderconfirmationpage",username=username))
     return render_template("shoppingcart.html",username=username,sid=int(sid),tdb=tdb,gtotal=total)
-
+"""................................................................................................."""
+"""................................................................................................."""
+"""................................................................................................."""
 
 if __name__=="__main__":
     app.run(debug=True)
