@@ -147,7 +147,7 @@ def loginpage():
                             elif row.employee_department=="orders":
                                 return redirect(url_for("stafforder",username=username))
                 else:
-                    return redirect(url_for("cutomerhomepage",username))
+                    return redirect(url_for("customerhomepage",username=username))
     return render_template("login.html")
 
 @app.route("/signup",methods=["GET","POST"])
@@ -278,12 +278,11 @@ def menu(sid,username):
 """..........................................Inventory.............................................."""
 @app.route("/inventory/<username>",methods=["GET","POST"])
 def inventory(username):
-    allrows=inventory_database.query.all()
-    store_id=findstoreid(username)
-    store_id=int(store_id)
+    idb=inventory_database.query.all()
+    store_id=int(findstoreid(username))
     row=store_database.query.filter_by(store_id=store_id).first()
     storename=row.store_name
-    return render_template("inventory.html",idb=allrows,sid=store_id,username=username,storename=storename)
+    return render_template("inventory.html",idb=idb,sid=store_id,username=username,storename=storename)
 
 @app.route("/inventory_order/<username>",methods=["GET","POST"])
 def inventory_order():
@@ -363,6 +362,12 @@ def inventory_updation(sid,username):
 
 
 
+"""............................................Orderspage........................................."""
+@app.route("/orderspage/<username>",methods=["GET","POST"])
+def orderspage(username):
+    sid=findstoreid(username)
+    odb=orders_database.query.all()
+    return render_template("orderspage.html",sid=sid,odb=odb)
 
 
 
@@ -750,6 +755,12 @@ def findstorename(sid):
         if sid==row.store_id:
             return row.store_name
 
+def findcustomerid(username):
+    udb=user_database.query.all()
+    for row in udb:
+        if username==row.user_name:
+            return row.sno
+
 @app.route("/customerhomepage/<username>",methods=["GET","POST"])
 def customerhomepage(username):
     if request.method=='POST':
@@ -806,7 +817,8 @@ def customerorderinfo(username,itemid,sid):
 @app.route("/customerorderconfirmationpage/<username>",methods=["GET","POST"])
 def customerorderconfirmationpage(username):
     odb=orders_database.query.all()
-    return render_template("customerorderconfirmationpage.html",username=username,odb=odb)
+    cid=findcustomerid(username)
+    return render_template("customerorderconfirmationpage.html",username=username,odb=odb,cid=cid)
 
 @app.route("/shoppingcart/<username>/<sid>",methods=["GET","POST"])
 def shoppingcart(username,sid):

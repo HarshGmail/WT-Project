@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Order History</title>
 </head>
 <style>
-    body{
-        background-color: black;
-    }
+  body{
+    background-image:url("/static/background1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
 </style>
 <body>
-    <div class="container" style="background-color:white; width:1000px">
+    <div class="container" style="background-color:white; width:1000px;margin-top:10px;margin-left:150px">
         <table class="table">
             <thead>
               <tr>
@@ -23,7 +27,7 @@
               </tr>
             </thead>
             <tbody>
-                {%for row in ood%}
+                {%for row in odb%}
               <tr>
                 <th scope="row">{{loop.index}}</th>
                 <td>{{row.store_order_details}}</td>
