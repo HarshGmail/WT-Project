@@ -116,6 +116,12 @@ class orders_database(db.Model):
     store_order_profit_total=db.Column(db.Integer,nullable=False)
     store_order_total=db.Column(db.Integer,nullable=False)
 
+class csvdatabase(db.Model):
+    sno=db.Column(db.Integer,primary_key=True)
+    desc = db.Column(db.String(1500),nullable=False)
+    date = db.Column(db.DateTime)
+    quantity = db.Column(db.Integer,nullable=False)
+
 db.create_all()
 """................................................................................................."""
 """................................................................................................."""
@@ -263,8 +269,26 @@ def findstoreidstaff(username):
 def success():  
     if request.method == 'POST':  
         f = request.files['file']
+        t = request.form['text']
         d=pd.DataFrame(f)
-        k=adddatabase(d)
+        # k=adddatabase(d)
+        allrows = csvdatabase.query.all()
+        sno = 0
+        for row in allrows:
+            sno = int(row.sno)
+        if sno == 0:
+            sno = 1
+        else:
+            sno += 1
+        print(d)
+        for i in d.index:
+            # date = i['date']
+            # q = i['quantity'] 
+            print(d["Quantity"][i])   
+            row = csvdatabase(sno = sno, desc = t, date = d['date'][i], q = d['quantity'][i])
+            sno+=1
+            db.session.add(row)
+            db.session.commit()    
         return render_template("acknowledgement.html", name = f.filename) 
 
 """................................................................................................."""
@@ -899,7 +923,8 @@ def forecast():
 
 def adddatabase(d):
     e={"date":[], "quantity":[]}
-    k=pd.to_datetime(d['InvoiceDate']).dt.date
+    print(d)
+    k=pd.to_datetime(d['date']).dt.date
     o=k.iloc[0];s=0
     for i in range(1,len(k)):
         if k.iloc[i]!=o:
