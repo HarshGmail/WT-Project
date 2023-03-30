@@ -270,8 +270,8 @@ def success():
     if request.method == 'POST':  
         f = request.files['file']
         t = request.form['text']
-        d=pd.DataFrame(f)
-        # k=adddatabase(d)
+        d=pd.read_csv(f)
+        d=adddatabase(d)
         allrows = csvdatabase.query.all()
         sno = 0
         for row in allrows:
@@ -280,12 +280,10 @@ def success():
             sno = 1
         else:
             sno += 1
-        print(d)
         for i in d.index:
             # date = i['date']
-            # q = i['quantity'] 
-            print(d["Quantity"][i])   
-            row = csvdatabase(sno = sno, desc = t, date = d['date'][i], q = d['quantity'][i])
+            # q = i['quantity']   
+            row = csvdatabase(sno = sno, desc = t, date = d['date'][i], quantity = d['quantity'][i])
             sno+=1
             db.session.add(row)
             db.session.commit()    
@@ -930,7 +928,7 @@ def adddatabase(d):
         if k.iloc[i]!=o:
             e["date"].append(o)
             e["quantity"].append(s)
-            s=d['Quantity'].iloc[i];o=k.iloc[i]
+            s=d['quantity'].iloc[i];o=k.iloc[i]
         else:
             s+=d['Quantity'].iloc[i]
     data=pd.DataFrame(e)
