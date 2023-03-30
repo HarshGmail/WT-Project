@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>Graphs</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        
+    </head>
+<body>
+    {% block content %}
+    {% if condition==1 %}
+        <img src="static/fig1.jpg" alt="'not available">
+    {% else %}
+    <img src="static/fig.png" alt="'not available">
+    <div class="container" style="background-color:white; width:1000px;margin-top:10px;margin-left:150px">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" style="width:10px">S.no</th>
+                <th scope="col" style="width:700px">Date</th>
+                <th scope="col" style="width:50px">Quantity</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+                {%for row in data.index%}
+              <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{data['ds'][row]}}</td>
+                <td>{{data['y'][row]}}</td>
+                
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+    {% endif %}
+{% endblock content %}
+<form action = "/lol2/{{product}}" method = "post" enctype="multipart/form-data">  
+    <div class="form-group">
+        <input type="number" class="form-control" style="opacity: 0.8;" name="text" placeholder="enter the next days to predict">
+    </div> 
+    <input type = "submit" value="enter">
+    
+</form> 
+</body>
+</html>
