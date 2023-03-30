@@ -263,7 +263,8 @@ def findstoreidstaff(username):
 def success():  
     if request.method == 'POST':  
         f = request.files['file']
-        f.save(f.filename)  
+        d=pd.DataFrame(f)
+        k=adddatabase(d)
         return render_template("acknowledgement.html", name = f.filename) 
 
 """................................................................................................."""
