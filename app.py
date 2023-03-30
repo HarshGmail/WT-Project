@@ -900,7 +900,11 @@ def adddatabase(d):
             s+=d['Quantity'].iloc[i]
     data=pd.DataFrame(e)
     return data
-    
+
+def savefile(k):
+    fig, ax = plt.subplots()
+    k.plot(figsize=(12,6))
+    fig.savefig('static/my_plot.png')
 
 
 
