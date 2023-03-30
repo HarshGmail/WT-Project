@@ -912,6 +912,12 @@ def shoppingcart(username,sid):
 """................................................................................................."""
 """................................................................................................."""
 
+@app.route('/lol')
+def lol():
+    df=pd.read_sql_query(sql=db.select([csvdatabase]).where(csvdatabase.desc == 'apple'),con="sqlite:///My_Project_Database.db")
+    print(df)
+    return render_template("staff.html")
+
 def forecast():
     model=Prophet()
     connection_string = "sqlite:///My_Project_Database.db"
