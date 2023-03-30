@@ -18,7 +18,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib import pyplot
-
+from datetime import timedelta
 from sqlalchemy import create_engine
 
 
@@ -266,12 +266,12 @@ def findstoreidstaff(username):
     return int(store_id)
 
 @app.route('/success', methods = ['POST'])  
-def success():  
+def success():
     if request.method == 'POST':  
         f = request.files['file']
         t = request.form['text']
-        d=pd.DataFrame(f)
-        # k=adddatabase(d)
+        d=pd.read_csv(f)
+        d=adddatabase(d)
         allrows = csvdatabase.query.all()
         sno = 0
         for row in allrows:
@@ -280,12 +280,10 @@ def success():
             sno = 1
         else:
             sno += 1
-        print(d)
         for i in d.index:
             # date = i['date']
-            # q = i['quantity'] 
-            print(d["Quantity"][i])   
-            row = csvdatabase(sno = sno, desc = t, date = d['date'][i], q = d['quantity'][i])
+            # q = i['quantity']   
+            row = csvdatabase(sno = sno, desc = t, date = d['date'][i], quantity = int(d['quantity'][i]))
             sno+=1
             db.session.add(row)
             db.session.commit()    
@@ -914,6 +912,12 @@ def shoppingcart(username,sid):
 """................................................................................................."""
 """................................................................................................."""
 
+@app.route('/lol')
+def lol():
+    df=pd.read_sql_query(sql=db.select([csvdatabase]).where(csvdatabase.desc == 'apple'),con="sqlite:///My_Project_Database.db")
+    print(df)
+    return render_template("staff.html")
+
 def forecast():
     model=Prophet()
     connection_string = "sqlite:///My_Project_Database.db"
@@ -930,18 +934,26 @@ def adddatabase(d):
         if k.iloc[i]!=o:
             e["date"].append(o)
             e["quantity"].append(s)
-            s=d['Quantity'].iloc[i];o=k.iloc[i]
+            s=d['quantity'].iloc[i];o=k.iloc[i]
         else:
             s+=d['Quantity'].iloc[i]
     data=pd.DataFrame(e)
     return data
+def showgraph(d):
+    d.plot(x='ds',y='y')
+    pyplot.savefig('/static/fig1.png')
 
-def savefile(k,d):
+def showgraph1(k,d):
     ax=k.plot(x='ds',y='y')
     fig=d.plot(ax=ax,x='ds',y='y')
     pyplot.savefig('/static/fig.png')
     
-
+def extradate(k,n):
+    dates=[]
+    for i in range(1,n+1):
+        dates.append(k+timedelta(days=i))
+    dates=pd.DataFrame(dates)
+    return dates
 
 
 
