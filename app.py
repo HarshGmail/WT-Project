@@ -8,10 +8,13 @@ from datetime import datetime
 from email.policy import default
 from enum import unique
 from re import A
-import cv2
-from pyzbar import pyzbar
+#import cv2
+#from pyzbar import pyzbar
 import sqlalchemy
+import pandas as pd
+from prophet import Prophet
 
+from sqlalchemy import create_engine
 
 
 """........................................Configuration.........................................."""
@@ -121,7 +124,9 @@ db.create_all()
 
 "...........................................Login Page..............................................."
 @app.route("/",methods=["GET","POST"]) 
+
 def loginpage():
+    
     if request.method=="POST":
         allrows=user_database.query.all()
         username=request.form["username"]
@@ -870,6 +875,22 @@ def shoppingcart(username,sid):
 """................................................................................................."""
 """................................................................................................."""
 """................................................................................................."""
+ 
+def forecast():
+    model=Prophet()
+    connection_string = "sqlite:///My_Project_Database.db"
+    engine = create_engine(connection_string)
+    table_df = pd.read_sql_table('inventory_database', engine)
+    table_df=pd.DataFrame(table_df)
+    
+
+
+
+
+
+
+
+
 
 if __name__=="__main__":
     app.run(debug=True)
