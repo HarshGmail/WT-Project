@@ -18,7 +18,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib import pyplot
-
+from datetime import timedelta
 from sqlalchemy import create_engine
 
 
@@ -910,13 +910,21 @@ def adddatabase(d):
             s+=d['Quantity'].iloc[i]
     data=pd.DataFrame(e)
     return data
+def showgraph(d):
+    d.plot(x='ds',y='y')
+    pyplot.savefig('/static/fig1.png')
 
-def savefile(k,d):
+def showgraph1(k,d):
     ax=k.plot(x='ds',y='y')
     fig=d.plot(ax=ax,x='ds',y='y')
     pyplot.savefig('/static/fig.png')
     
-
+def extradate(k,n):
+    dates=[]
+    for i in range(1,n+1):
+        dates.append(k+timedelta(days=i))
+    dates=pd.DataFrame(dates)
+    return dates
 
 
 
