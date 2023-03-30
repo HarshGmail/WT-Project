@@ -266,7 +266,7 @@ def findstoreidstaff(username):
     return int(store_id)
 
 @app.route('/success', methods = ['POST'])  
-def success():  
+def success():
     if request.method == 'POST':  
         f = request.files['file']
         t = request.form['text']
@@ -283,7 +283,7 @@ def success():
         for i in d.index:
             # date = i['date']
             # q = i['quantity']   
-            row = csvdatabase(sno = sno, desc = t, date = d['date'][i], quantity = d['quantity'][i])
+            row = csvdatabase(sno = sno, desc = t, date = d['date'][i], quantity = int(d['quantity'][i]))
             sno+=1
             db.session.add(row)
             db.session.commit()    
