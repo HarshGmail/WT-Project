@@ -257,6 +257,14 @@ def findstoreidstaff(username):
             store_id=row.store_id
             break
     return int(store_id)
+
+@app.route('/success', methods = ['POST'])  
+def success():  
+    if request.method == 'POST':  
+        f = request.files['file']
+        f.save(f.filename)  
+        return render_template("acknowledgement.html", name = f.filename) 
+
 """................................................................................................."""
 """................................................................................................."""
 """................................................................................................."""

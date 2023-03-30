@@ -367,7 +367,14 @@
     </div> -->
     <!-- <br><br><br><br><br><br><br> -->
     <h3>{{storename}}'s total Inventory</h3>
-    <div class="button_r"><a href="/inventory_add_item_page/{{sid}}/{{username}}"><button>Add an Item</button></a> <a href="/inventory_modify_item/{{sid}}/{{username}}"><button>Modify an Item</button></a> <a href="/inventory_updation//{{sid}}/{{username}}"><button>Inventory Updation</button></a></div>
+    <div class="button_r"><a href="/inventory_add_item_page/{{sid}}/{{username}}"><button>Add an Item</button></a> <a href="/inventory_modify_item/{{sid}}/{{username}}"><button>Modify an Item</button></a> <a href="/inventory_updation//{{sid}}/{{username}}"><button>Inventory Updation</button></a>
+        <br>
+        <br>
+        <form action = "/success" method = "post" enctype="multipart/form-data">  
+            <input type="file" name="file" />  
+            <input type = "submit" value="Upload">  
+        </form> 
+    </div> 
     <div class="container3">
         {% for row in idb%}
         {%if row.store_id==sid%}
