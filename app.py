@@ -17,6 +17,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from matplotlib import pyplot
 
 from sqlalchemy import create_engine
 
@@ -909,10 +910,11 @@ def adddatabase(d):
     data=pd.DataFrame(e)
     return data
 
-def savefile(k):
-    fig, ax = plt.subplots()
-    k.plot(figsize=(12,6))
-    fig.savefig('static/my_plot.png')
+def savefile(k,d):
+    ax=k.plot(x='ds',y='y')
+    fig=d.plot(ax=ax,x='ds',y='y')
+    pyplot.savefig('/static/fig.png')
+    
 
 
 
