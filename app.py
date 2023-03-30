@@ -13,6 +13,10 @@ from re import A
 import sqlalchemy
 import pandas as pd
 from prophet import Prophet
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 from sqlalchemy import create_engine
 
@@ -875,13 +879,27 @@ def shoppingcart(username,sid):
 """................................................................................................."""
 """................................................................................................."""
 """................................................................................................."""
- 
+
 def forecast():
     model=Prophet()
     connection_string = "sqlite:///My_Project_Database.db"
     engine = create_engine(connection_string)
     table_df = pd.read_sql_table('inventory_database', engine)
     table_df=pd.DataFrame(table_df)
+
+def adddatabase(d):
+    e={"date":[], "quantity":[]}
+    k=pd.to_datetime(d['InvoiceDate']).dt.date
+    o=k.iloc[0];s=0
+    for i in range(1,len(k)):
+        if k.iloc[i]!=o:
+            e["date"].append(o)
+            e["quantity"].append(s)
+            s=d['Quantity'].iloc[i];o=k.iloc[i]
+        else:
+            s+=d['Quantity'].iloc[i]
+    data=pd.DataFrame(e)
+    return data
     
 
 
