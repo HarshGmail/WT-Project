@@ -1,5 +1,6 @@
 from contextlib import redirect_stdout
 import email
+import os
 from datetime import datetime
 from flask import Flask, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
@@ -122,6 +123,9 @@ class csvdatabase(db.Model):
     date = db.Column(db.DateTime)
     quantity = db.Column(db.Integer,nullable=False)
 
+class product(db.Model):
+    sno=db.Column(db.Integer,primary_key=True,autoincrement=True)
+    product=db.Column(db.String(20),nullable=False)
 db.create_all()
 """................................................................................................."""
 """................................................................................................."""
@@ -280,14 +284,23 @@ def success():
             sno = 1
         else:
             sno += 1
-        for i in d.index:
-            # date = i['date']
-            # q = i['quantity']   
-            row = csvdatabase(sno = sno, desc = t, date = d['date'][i], quantity = int(d['quantity'][i]))
-            sno+=1
-            db.session.add(row)
-            db.session.commit()    
-        return render_template("acknowledgement.html", name = f.filename) 
+        k=product.query.all()
+        for i in k:
+            if t==i.product:
+                return render_template('inventory.html')
+                break
+        else:
+            row1=product(product=t)
+            db.session.add(row1)
+            db.session.commit()
+            for i in d.index:
+                # date = i['date']
+                # q = i['quantity']   
+                row = csvdatabase(sno = sno, desc = t, date = d['date'][i], quantity = int(d['quantity'][i]))
+                sno+=1
+                db.session.add(row)
+                db.session.commit()    
+            return render_template("acknowledgement.html", name = f.filename) 
 
 """................................................................................................."""
 """................................................................................................."""
@@ -912,22 +925,50 @@ def shoppingcart(username,sid):
 """................................................................................................."""
 """................................................................................................."""
 
-@app.route('/lol')
-def lol():
-    df=pd.read_sql_query(sql=db.select([csvdatabase]).where(csvdatabase.desc == 'apple'),con="sqlite:///My_Project_Database.db")
-    print(df)
-    return render_template("staff.html")
+@app.route('/lol/<product>')
+def lol(product):
+    print(product)
+    df=pd.read_sql_query(sql=db.select([csvdatabase]).where(csvdatabase.desc == product),con="sqlite:///My_Project_Database.db")
+    df=pd.DataFrame(df)
+    df.drop(['desc','sno'],axis=1,inplace=True)
+    #print(df['desc'])
+    #print(df)
+    df.columns=['ds','y']
+    showgraph(df)
+    return render_template("graph.html",condition=1,product=product)
 
-def forecast():
+@app.route('/lol2/<product>',methods=["POST"])
+def lol2(product):
+    n=request.form['text']
+    df=pd.read_sql_query(sql=db.select([csvdatabase]).where(csvdatabase.desc == product),con="sqlite:///My_Project_Database.db")
+    df=pd.DataFrame(df)
+    df.drop(['desc','sno'],axis=1,inplace=True)
+    #print(df['desc'])
+    #print(df)
+    df.columns=['ds','y']
+    print(df.iloc[-1]['ds'])
+    dates=extradate(df.iloc[-1]['ds'],int(n))
+    df2=forecast(df,dates)
+    df3=df2[['ds','yhat']].copy()
+    df3.columns=['ds','y']
+    #print(type())
+    l=len(df)-20
+    showgraph1(df.iloc[l:],df3)
+    return render_template('graph.html',condition=0,data=df3,product=product)
+
+@app.route('/products')
+def products():
+    k=product.query.all()
+    return render_template("products.html",odb=k)
+
+def forecast(d,future):
     model=Prophet()
-    connection_string = "sqlite:///My_Project_Database.db"
-    engine = create_engine(connection_string)
-    table_df = pd.read_sql_table('inventory_database', engine)
-    table_df=pd.DataFrame(table_df)
-
+    model.fit(d)
+    f=model.predict(future)
+    return f
 def adddatabase(d):
     e={"date":[], "quantity":[]}
-    print(d)
+    #print(d)
     k=pd.to_datetime(d['date']).dt.date
     o=k.iloc[0];s=0
     for i in range(1,len(k)):
@@ -941,18 +982,19 @@ def adddatabase(d):
     return data
 def showgraph(d):
     d.plot(x='ds',y='y')
-    pyplot.savefig('/static/fig1.png')
+    pyplot.savefig('static/fig1.jpg')
 
 def showgraph1(k,d):
     ax=k.plot(x='ds',y='y')
-    fig=d.plot(ax=ax,x='ds',y='y')
-    pyplot.savefig('/static/fig.png')
+    d.plot(ax=ax,x='ds',y='y')
+    pyplot.savefig('static/fig.png')
     
 def extradate(k,n):
     dates=[]
     for i in range(1,n+1):
         dates.append(k+timedelta(days=i))
     dates=pd.DataFrame(dates)
+    dates.columns=['ds']
     return dates
 
 
