@@ -122,10 +122,13 @@ class csvdatabase(db.Model):
     desc = db.Column(db.String(1500),nullable=False)
     date = db.Column(db.DateTime)
     quantity = db.Column(db.Integer,nullable=False)
+    username=db.Column(db.String(100),nullable=False)
 
 class product(db.Model):
     sno=db.Column(db.Integer,primary_key=True,autoincrement=True)
     product=db.Column(db.String(20),nullable=False)
+    username=db.Column(db.String(100),nullable=False)
+
 db.create_all()
 """................................................................................................."""
 """................................................................................................."""
@@ -269,8 +272,10 @@ def findstoreidstaff(username):
             break
     return int(store_id)
 
-@app.route('/success', methods = ['POST'])  
-def success():
+@app.route('/success/<username>', methods = ['POST'])  
+def success(username):
+    product.query.delete()
+    csvdatabase.query.delete()
     if request.method == 'POST':  
         f = request.files['file']
         t = request.form['text']
@@ -290,13 +295,13 @@ def success():
                 return render_template('inventory.html')
                 break
         else:
-            row1=product(product=t)
+            row1=product(product=t,username=username)
             db.session.add(row1)
             db.session.commit()
             for i in d.index:
                 # date = i['date']
                 # q = i['quantity']   
-                row = csvdatabase(sno = sno, desc = t, date = d['date'][i], quantity = int(d['quantity'][i]))
+                row = csvdatabase(sno = sno, desc = t, date = d['date'][i], quantity = int(d['quantity'][i]),username=username)
                 sno+=1
                 db.session.add(row)
                 db.session.commit()    
@@ -925,22 +930,22 @@ def shoppingcart(username,sid):
 """................................................................................................."""
 """................................................................................................."""
 
-@app.route('/lol/<product>')
-def lol(product):
+@app.route('/lol/<username>/<product>')
+def lol(product,username):
     print(product)
-    df=pd.read_sql_query(sql=db.select([csvdatabase]).where(csvdatabase.desc == product),con="sqlite:///My_Project_Database.db")
+    df=pd.read_sql_query(sql=db.select([csvdatabase]).where(csvdatabase.desc == product & csvdatabase.username == username),con="sqlite:///My_Project_Database.db")
     df=pd.DataFrame(df)
     df.drop(['desc','sno'],axis=1,inplace=True)
     #print(df['desc'])
     #print(df)
     df.columns=['ds','y']
     showgraph(df)
-    return render_template("graph.html",condition=1,product=product)
+    return render_template("graph.html",condition=1,product=product,username=username)
 
-@app.route('/lol2/<product>',methods=["POST"])
-def lol2(product):
+@app.route('/lol2/<username>/<product>',methods=["POST"])
+def lol2(product,username):
     n=request.form['text']
-    df=pd.read_sql_query(sql=db.select([csvdatabase]).where(csvdatabase.desc == product),con="sqlite:///My_Project_Database.db")
+    df=pd.read_sql_query(sql=db.select([csvdatabase]).where(csvdatabase.desc == product & csvdatabase.username == username ),con="sqlite:///My_Project_Database.db")
     df=pd.DataFrame(df)
     df.drop(['desc','sno'],axis=1,inplace=True)
     #print(df['desc'])
@@ -954,12 +959,12 @@ def lol2(product):
     #print(type())
     l=len(df)-20
     showgraph1(df.iloc[l:],df3)
-    return render_template('graph.html',condition=0,data=df3,product=product)
+    return render_template('graph.html',condition=0,data=df3,product=product,username=username)
 
-@app.route('/products')
-def products():
-    k=product.query.all()
-    return render_template("products.html",odb=k)
+@app.route('/products/<username>')
+def products(username):
+    k=product.query.filter(username=username).all()
+    return render_template("products.html",odb=k,username=username)
 
 def forecast(d,future):
     model=Prophet()
